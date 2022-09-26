@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/aarnereime/bulderbank-eiendomsverdi/issues"
   },
-  "homepage": "https://github.com/aarnereime/bulderbank-eiendomsverdi#readme"
+  "homepage": "https://github.com/aarnereime/bulderbank-eiendomsverdi#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
