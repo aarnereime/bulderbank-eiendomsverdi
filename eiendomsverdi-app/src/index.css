@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "Aeonik";
+  src: local("Aeonik"), url("./fonts/Aeonik/Aeonik-Regular.ttf") format("truetype");
+}

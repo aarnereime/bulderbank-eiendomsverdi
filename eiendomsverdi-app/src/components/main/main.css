@@ -1,0 +1,155 @@
+html, body {
+  background-color: #0b1222;
+  color: white;
+  font-family: 'Aeonik', sans-serif;
+}
+
+h1, h2 {
+  font-family: 'Aeonik';
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  margin: 20px;
+}
+
+h1 {
+  line-height: 82px;
+}
+
+h2 {
+  line-height: 49.92px;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  }
+
+.bb-eiendomsverdi__blockelement {
+  max-width: 1200px;
+  padding: auto 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media (min-width: 767px) {
+  .bb-eiendomsverdi__blockelement {
+    padding-top: 3.1em;
+  }
+}
+
+.bb-eiendomsverdi-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 10%;
+}
+
+@media (min-width: 767px) {
+  .bb-eiendomsverdi-grid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.bb-col-1 {
+  flex: 1;
+}
+
+.checklist-ul-list {
+  margin: 0 3px;
+}
+
+.list1 {
+  list-style: none;
+}
+
+.list1 li {
+  text-indent: -1.6rem;
+}
+
+.list1 li:nth-child(1)::before {
+  content: '🤑 ';
+}
+.list1 li:nth-child(2)::before {
+  content: '🤞 ';
+}
+
+.checklist-li-item {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0.05em;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    padding: 25px 0;
+}
+
+.button-sok-om-laan {
+  width: 250px;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 15px 0;
+  color: white;
+  background: #185DC1;
+  margin: 80px 20px;
+  border-radius: 100px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+}
+
+.sjekk {
+  padding-bottom: 40px;
+}
+
+.hvordan {
+  padding-top: 20px;
+  padding-bottom: 200px;
+}
+
+.list2 {
+  margin: 10px 30px;
+}
+
+ ol {
+   counter-reset: item;
+   list-style-type: none;
+   line-height: 2.2;
+ }
+        
+ol li {
+  display: block;
+  position: relative;
+}
+        
+ ol li:before {
+   content: counter(item) " ";
+   counter-increment: item;
+   color: white;
+   position: absolute;
+   top: 50%;
+   margin-top: -1.2em;
+   margin-left: -3.5em;
+   background: #185DC1;
+   height: 40px;
+   width: 40px;
+   line-height: 40px;
+   text-align: center;
+   border-radius: 100px;
+   font-weight: 700;
+ }
+
+@media (min-width: 767px) {
+  .list2 {
+    display: inline-block;
+    width: 48%;
+  }
+}
