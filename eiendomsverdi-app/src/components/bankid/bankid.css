@@ -1,0 +1,74 @@
+.bankid {
+  text-align: center;
+}
+
+.bankid h1 {
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    margin: 20px;
+}
+
+.bb-bankid {
+  max-width: 1200px;
+  padding: auto 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.linkMain {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+}
+
+.linkMain:hover {
+  color: blue;
+  font-size: 31px;
+}
+
+.bb-innlogging {
+  padding: 5%;
+}
+
+.bb-fødselsnummer {
+  padding: 5%;
+}
+
+.bb-fødselsnummer h2 {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+
+.fødselsnummer-login:focus {
+  border: 2px solid #185DC1;
+}
+
+.fødselsnummer-login {
+  outline: none;
+  color: white;
+  font-size: 25px;
+  padding: 10px;
+  background: transparent;
+  border: 2px solid #E6E6E6;
+  border-radius: 15px; 
+  letter-spacing: 0.05em;
+}
+
+.fødselsnummer-neste {
+  width: 200px;
+  font-size: 20px;
+  padding: 15px 0;
+  color: white;
+  background: #185DC1;
+  margin: 20px auto;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+}
+

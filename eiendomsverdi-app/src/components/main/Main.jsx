@@ -1,6 +1,7 @@
 import React from 'react'
 import './main.css'
 import img from '../../images/Du-kan-flytte-lånet2.png';
+import {Link} from 'react-router-dom'
 
 const Main = () => {
   return (
@@ -19,9 +20,12 @@ const Main = () => {
             </ul>
 
             <div className='sok-laan__button-wrapper'>
+              <Link to='/bankid'>
               <button className="button-sok-om-laan">
-              Sjekk boligverdi </button>
+                  Sjekk boligverdi </button>
+                </Link>
             </div>
+            
           </article>
 
           <div className='bb-col1' style={{height: '100%'}}>
