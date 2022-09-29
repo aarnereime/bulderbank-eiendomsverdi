@@ -6,6 +6,7 @@ const BankID = () => {
 
   const [name, setName] = useState('');
 
+
   const handleInput = event => {
     setName(event.target.value);
   };
@@ -13,6 +14,11 @@ const BankID = () => {
   const logValue = () => {
     console.log(name);
   };
+
+  // Gjør det bare mulig å taste inn tall i inputen
+  const allowOnlyNumbersInput = event => {
+    !/[0-9]/.test(event.key) && event.preventDefault()
+  }
 
   return (
     <div className='bankid'>
@@ -28,16 +34,16 @@ const BankID = () => {
       <div className='bb-fødselsnummer'>
         <form>
           <h2>Hva er ditt fødselsnummer:</h2>
-          <label>
-            <input onChange={handleInput} className='fødselsnummer-login' type="text" placeholder='11 siffer' maxLength='11'/>
-          </label>
-        </form>
-
-        <Link to=''>
+        
+            <input onChange={handleInput} className='fødselsnummer-login' type="text"
+              placeholder='11 siffer' maxLength='11' required='true' onKeyPress={allowOnlyNumbersInput} />
+      
+          <Link to=''>
           <button onClick={logValue} className="fødselsnummer-neste">
             Neste
           </button>
         </Link>
+        </form>
   
       </div>
 

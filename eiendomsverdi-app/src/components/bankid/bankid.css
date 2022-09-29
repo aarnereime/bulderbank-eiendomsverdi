@@ -43,6 +43,11 @@
   font-weight: 500;
 }
 
+.bb-fødselsnummer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .fødselsnummer-login:focus {
   border: 2px solid #185DC1;
