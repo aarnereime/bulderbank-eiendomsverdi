@@ -1,19 +1,26 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './bankid.css'
 
 const BankID = () => {
 
-  const [name, setName] = useState('');
+  const navigate = useNavigate();
+  const fødselsnummerRef = useRef();
 
+  
+  const handleSubmit = event => {
+    // unngår å refreshe siden
+    event.preventDefault(); 
 
-  const handleInput = event => {
-    setName(event.target.value);
-  };
+    // skriver ut verdi fra input (senere bruke denne informasjonen til API)
+    console.log(fødselsnummerRef.current.value);
 
-  const logValue = () => {
-    console.log(name);
-  };
+    // fjerner det man skrev inn i input
+    event.target.reset();
+
+    //navigerer tilbake til mainpage (senere skal denne ta oss videre til visning av eiendomwverdien)
+    navigate('/');
+  }
 
   // Gjør det bare mulig å taste inn tall i inputen
   const allowOnlyNumbersInput = event => {
@@ -32,17 +39,16 @@ const BankID = () => {
       </div>
 
       <div className='bb-fødselsnummer'>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2>Hva er ditt fødselsnummer:</h2>
         
-            <input onChange={handleInput} className='fødselsnummer-login' type="text"
-              placeholder='11 siffer' maxLength='11' required='true' onKeyPress={allowOnlyNumbersInput} />
+          <input ref={fødselsnummerRef} required="required"  className='fødselsnummer-login' type='text'
+            placeholder='11 siffer' maxLength='11' minLength='11' onKeyPress={allowOnlyNumbersInput} />
       
-          <Link to=''>
-          <button onClick={logValue} className="fødselsnummer-neste">
+          <button type='submit' className="fødselsnummer-neste">
             Neste
           </button>
-        </Link>
+        
         </form>
   
       </div>
