@@ -1,5 +1,5 @@
 .bankid {
-  text-align: center;
+  
 }
 
 .bankid h1 {
@@ -17,19 +17,21 @@
   overflow: hidden;
 }
 
-.linkMain {
-  text-decoration: none;
-  color: white;
-  font-size: 30px;
-}
-
-.linkMain:hover {
-  color: blue;
-  font-size: 31px;
-}
-
 .bb-innlogging {
   padding: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rødpil, .right {
+  flex: 1;
+  padding-left: 10%;
+}
+
+.rødpil svg {
+  width: 35px;
+  color: red;
 }
 
 .bb-fødselsnummer {

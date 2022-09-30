@@ -12,11 +12,11 @@ h1, h2 {
   margin: 20px;
 }
 
-h1 {
+.main h1 {
   line-height: 82px;
 }
 
-h2 {
+.main h2 {
   line-height: 49.92px;
 }
 

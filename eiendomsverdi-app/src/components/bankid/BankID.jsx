@@ -7,7 +7,7 @@ const BankID = () => {
   const navigate = useNavigate();
   const fødselsnummerRef = useRef();
 
-  
+
   const handleSubmit = event => {
     // unngår å refreshe siden
     event.preventDefault(); 
@@ -30,24 +30,36 @@ const BankID = () => {
   return (
     <div className='bankid'>
 
-      <div className='bb-bankid'>
-        <Link to='/' className='linkMain'>Gå tilbake til mainpage</Link>
-      </div>
-
       <div className='bb-innlogging'>
-        <h1>Innlogging til Bulder Bank</h1>
+        <div className='rødpil'>
+          <Link to='/'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" /></svg>
+          </Link>
+        </div>
+
+        <div className='innloggingTekst'>
+          <h1>Innlogging til Bulder Bank</h1>
+        </div>
+
+        <div className='right'></div>
       </div>
 
       <div className='bb-fødselsnummer'>
         <form onSubmit={handleSubmit}>
           <h2>Hva er ditt fødselsnummer:</h2>
         
-          <input ref={fødselsnummerRef} required="required"  className='fødselsnummer-login' type='text'
-            placeholder='11 siffer' maxLength='11' minLength='11' onKeyPress={allowOnlyNumbersInput} />
+          <input
+            className='fødselsnummer-login'
+            ref={fødselsnummerRef}
+            type='text'
+            required="required"
+            placeholder='11 siffer'
+            maxLength='11'
+            minLength='11'
+            onKeyPress={allowOnlyNumbersInput}/>
       
-          <button type='submit' className="fødselsnummer-neste">
-            Neste
-          </button>
+          <button type='submit' className="fødselsnummer-neste"> Neste </button>
         
         </form>
   
