@@ -7,7 +7,7 @@ const test = () => {
   const [allValues, setAllValues] = useState({
     firstname: "",
     lastname: "",
-    gender: "",
+    gender: "yo",
   });
 
   // useEffect(() => {
