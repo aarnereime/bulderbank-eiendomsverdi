@@ -46,7 +46,7 @@ const test = () => {
 
   return (
     <div>
-      {loading ? <div>Loading...</div>: <div>Hello {allValues.firstname} {allValues.lastname}, your gender is {allValues.gender}</div>}
+      {loading ? <div>Loading...</div>: <div>Hello! {allValues.firstname} {allValues.lastname}, your gender is {allValues.gender}</div>}
     </div>
   );
 };
