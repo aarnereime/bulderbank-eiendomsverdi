@@ -31,17 +31,37 @@ const getApiKey = async () => {
     });
     accessTokenKey = resp.data.accessToken;
   } catch (error) {
-    console.error("L BOZO");
+    console.error(error);
   }
 };
 
+const pNr = null;
+let cadastre = null;
+//Henter ut cadastre fra EDV API
+const getCadastre = async () => {
+  try {
+    await getApiKey();
+    const resp = await axios.get(
+      `https://api.eiendomsverdi.no/realproperty/v1/Owners/${pNr}/RealEstates`,
+      {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + accessTokenKey,
+        },
+      }
+    );
+    cadastre = resp.data.data[0].cadastre;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 //Henter ut info fra EDV API
 const getEindomsVerdiAPI = async () => {
   try {
-    await getApiKey();
+    await getCadastre();
     const resp = await axios.get(
-      "https://api.eiendomsverdi.no/realproperty/v1/RealEstates/3019/132/1065/0/24/attributes",
+      `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
       {
         method: "GET",
         headers: {
@@ -51,14 +71,15 @@ const getEindomsVerdiAPI = async () => {
     );
     apiInfo = resp.data;
   } catch (error) {
-    console.error("L2 BOZO");
+    console.error(error);
   }
 };
 
 getEindomsVerdiAPI();
 
+
 app.get("/api", (req, res) => {
-  res.json({ apiInfo });
+  res.json({apiInfo});
 });
 
 app.listen(PORT, () => {
