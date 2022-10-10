@@ -15,7 +15,7 @@ let apiInfo = "";
 const accessTokenURL =
   "https://webapps-api.test.bulderbank.tech/Edv/getedvtoken";
 
-dotenv.config();
+require("dotenv").config({ path: "../.env" });
 const api_key = process.env.REACT_APP_TOKEN;
 
 //Henter ut access token
