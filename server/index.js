@@ -5,6 +5,7 @@ const axios = require("axios");
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const app = express();
+const cors = require("cors");
 
 const PORT = process.env.PORT || 3001;
 
@@ -105,8 +106,17 @@ const googleImage = async () => {
 
 googleImage();
 
+app.use(cors());
+app.use(express.json());
+let nr = ""
+app.post('/pNr',cors(), (req, res) =>{
+  console.log(req.body);
+
+});
+
 app.get("/api", (req, res) => {
   res.send({apiInfo});
+  console.log(nr);
 });
 
 app.get("/image",(req, res) => {

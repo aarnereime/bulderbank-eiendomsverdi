@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import './bankid.css'
 
 const BankID = () => {
@@ -13,8 +14,8 @@ const BankID = () => {
     event.preventDefault(); 
 
     // skriver ut verdi fra input (senere bruke denne informasjonen til API)
-    console.log(fødselsnummerRef.current.value);
-
+    axios.post('http://localhost:3001/pNr', {number : fødselsnummerRef.current.value}).then(() => 'pNr sent').catch(err => {console.error(err);});
+        
     // fjerner det man skrev inn i input
     event.target.reset();
 
