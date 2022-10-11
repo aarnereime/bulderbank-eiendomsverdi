@@ -84,8 +84,6 @@ property_png = "";
 const googleImage = async () => {
   try {
     await getEindomsVerdiAPI();
-    console.log(address);
-    console.log(zipcode);
     const resp = await axios({
         url : `https://webapps-api.test.bulderbank.tech/Google/map`,
         method: "post",
