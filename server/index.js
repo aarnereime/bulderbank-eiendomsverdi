@@ -19,7 +19,6 @@ const accessTokenURL =
 //require("dotenv").config();
 
 const api_key = process.env.REACT_APP_TOKEN;
-console.log(api_key)
 //Henter ut access token
 const getApiKey = async () => {
   try {
@@ -35,7 +34,7 @@ const getApiKey = async () => {
   }
 };
 
-const pNr = null;
+const pNr = "";
 let cadastre = null;
 //Henter ut cadastre fra EDV API
 const getCadastre = async () => {
@@ -55,6 +54,8 @@ const getCadastre = async () => {
     console.error(error);
   }
 };
+let address = "";
+let zipcode = "";
 
 //Henter ut info fra EDV API
 const getEindomsVerdiAPI = async () => {
@@ -69,17 +70,49 @@ const getEindomsVerdiAPI = async () => {
         },
       }
     );
+    address = `${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`;
+    zipcode = resp.data.data.address.postOffice.code;
     apiInfo = resp.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-getEindomsVerdiAPI();
 
+property_png = "";
+//Henter ut info fra EDV API
+const googleImage = async () => {
+  try {
+    await getEindomsVerdiAPI();
+    console.log(address);
+    console.log(zipcode);
+    const resp = await axios({
+        url : `https://webapps-api.test.bulderbank.tech/Google/map`,
+        method: "post",
+        data: {
+            address : address,
+            postalCode : zipcode,
+            zoom : 20,
+            type : 1,
+            size : 640,
+            format : "png"
+        }
+      }
+    );
+    property_png = resp.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+googleImage();
 
 app.get("/api", (req, res) => {
-  res.json({apiInfo});
+  res.send({apiInfo});
+});
+
+app.get("/image",(req, res) => {
+  res.send({property_png});
 });
 
 app.listen(PORT, () => {
