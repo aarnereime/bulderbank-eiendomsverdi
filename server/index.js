@@ -44,7 +44,8 @@ let cadastre = "";
 let pNr = "";
 
 app.post("/pNr", function (req, res) {
-  pNr.num = req.body.pNr;
+  pNr = req.body.pNr;
+  console.log(pNr)
 });
 
 // const pNr = process.env.REACT_APP_FODSELSNUMMER;

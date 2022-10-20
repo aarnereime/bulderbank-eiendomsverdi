@@ -8,23 +8,10 @@ const BankID = () => {
   const fødselsnummerRef = useRef();
 
   const [allValues, setAllValues] = useState({
-    firstname: "Hello",
+    firstname: "",
     // lastname: "",
     // gender: "",
   });
-
-  //testing!!!!
-  const loadParameters = () => {
-    axios
-      .get("http://localhost:3001/api")
-      .then((response) => {
-        console.log(response.data);
-        console.log('hei')
-      })
-      .catch((error) => {
-        console.error(`Error fetching data: ${error}`);
-      });
-  };
 
   let handleSubmit = async (event) => {
     // unngår å refreshe siden
@@ -32,30 +19,29 @@ const BankID = () => {
 
     // setter en global api variabel til fødselsnummer i input
     let fødselsnummer = fødselsnummerRef.current.value;
-    
+
     // sender fødselsnummer fra input til backend
     axios
-      .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
+      .get("http://localhost:3001/api")
       .then((response) => {
-        console.log('hei')
-        console.log(response);
-        loadParameters();
-
-        // axios
-        //   .get("http://localhost:3001/api")
-        //   .then((response) => {
-        //     setAllValues({
-        //       firstname: response.data.apiInfo.data.address.streetName,
-        //       // lastname: response.data.data.address.streetLetter,
-        //       // gender: response.data.data.address.municipality,
-        //     });
-        //   })
-        //   .catch((error) => {
-        //     console.error(`Error fetching data: ${error}`);
-        //   });
+        console.log(response)
+        axios
+          .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
+          .then((response) => {
+            setAllValues({
+              firstname: response.data.apiInfo.data.address.streetName,
+              // lastname: response.data.data.address.streetLetter,
+              // gender: response.data.data.address.municipality,
+            });
+            console.log(allValues.firstname)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
+
       .catch((error) => {
-        console.log(error);
+        console.error(`Error fetching data: ${error}`);
       });
 
     // fjerner det man skrev inn i input
