@@ -39,12 +39,15 @@ const getApiKey = async () => {
   }
 };
 
+
 let cadastre = "";
-const pNr = { num: "" };
+let pNr = "";
 
 app.post("/pNr", function (req, res) {
   pNr.num = req.body.pNr;
 });
+
+// const pNr = process.env.REACT_APP_FODSELSNUMMER;
 
 //Henter ut cadastre fra EDV API
 const getCadastre = async () => {
@@ -64,8 +67,7 @@ const getCadastre = async () => {
     console.error(error);
   }
 };
-let address = "";
-let zipcode = "";
+
 
 //Henter ut info fra EDV API
 const getEindomsVerdiAPI = async () => {
@@ -87,11 +89,14 @@ const getEindomsVerdiAPI = async () => {
     console.error(error);
   }
 };
+let address = "";
+let zipcode = "";
+
 
 //Henter ut fornavn på eier av bolig
 const getFirstnameAPI = async () => {
   try {
-    await getApiKey();
+    await getCadastre();
     const resp = await axios.get(
       `https://api.eiendomsverdi.no/realproperty/v1/Owners/${pNr}/RealEstates`,
       {
@@ -132,19 +137,15 @@ const googleImage = async () => {
   }
 };
 
-googleImage();
+//googleImage();
+getEindomsVerdiAPI()
 
-app.use(cors());
-app.use(express.json());
-let nr = ""
-app.post('/pNr',cors(), (req, res) =>{
-  console.log(req.body);
-getFirstnameAPI();
-});
+getFirstnameAPI()
+
+
 
 app.get("/api", (req, res) => {
   res.send({ apiInfo, firstname });
-  console.log(nr);
 });
 
 app.get("/image",(req, res) => {

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./bankid.css";
@@ -7,19 +7,52 @@ const BankID = () => {
   const navigate = useNavigate();
   const fødselsnummerRef = useRef();
 
+  const [allValues, setAllValues] = useState({
+    firstname: "Hello",
+    // lastname: "",
+    // gender: "",
+  });
+
+  //testing!!!!
+  const loadParameters = () => {
+    axios
+      .get("http://localhost:3001/api")
+      .then((response) => {
+        console.log(response.data);
+        console.log('hei')
+      })
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+      });
+  };
+
   let handleSubmit = async (event) => {
     // unngår å refreshe siden
     event.preventDefault();
 
     // setter en global api variabel til fødselsnummer i input
     let fødselsnummer = fødselsnummerRef.current.value;
-
+    
     // sender fødselsnummer fra input til backend
-
     axios
       .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
       .then((response) => {
+        console.log('hei')
         console.log(response);
+        loadParameters();
+
+        // axios
+        //   .get("http://localhost:3001/api")
+        //   .then((response) => {
+        //     setAllValues({
+        //       firstname: response.data.apiInfo.data.address.streetName,
+        //       // lastname: response.data.data.address.streetLetter,
+        //       // gender: response.data.data.address.municipality,
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     console.error(`Error fetching data: ${error}`);
+        //   });
       })
       .catch((error) => {
         console.log(error);
@@ -29,7 +62,7 @@ const BankID = () => {
     event.target.reset();
 
     //navigerer tilbake til mainpage (senere skal denne ta oss videre til visning av eiendomwverdien)
-    navigate("/boligverdi");
+    // navigate("/boligverdi");
   };
 
   // Gjør det bare mulig å taste inn tall i inputen
@@ -82,8 +115,7 @@ const BankID = () => {
           />
 
           <button type="submit" className="fødselsnummer-neste">
-            {" "}
-            Neste{" "}
+            Neste
           </button>
         </form>
       </div>
