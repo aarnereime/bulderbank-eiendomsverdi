@@ -1,11 +1,14 @@
 // server/index.js
-//test
 const express = require("express");
 const axios = require("axios");
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+const path = require("path");
+
 const app = express();
+
 const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
@@ -13,13 +16,14 @@ const PORT = process.env.PORT || 3001;
 
 let accessTokenKey = "";
 let apiInfo = "";
+let firstname = "";
 
 const accessTokenURL =
-  "https://webapps-api.test.bulderbank.tech/Edv/getedvtoken";
+  "https://webapps-api.prod.bulderbank.tech/Edv/getedvtoken";
 
-//require("dotenv").config();
-
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const api_key = process.env.REACT_APP_TOKEN;
+
 //Henter ut access token
 const getApiKey = async () => {
   try {
@@ -35,8 +39,13 @@ const getApiKey = async () => {
   }
 };
 
-const pNr = "";
-let cadastre = null;
+let cadastre = "";
+const pNr = { num: "" };
+
+app.post("/pNr", function (req, res) {
+  pNr.num = req.body.pNr;
+});
+
 //Henter ut cadastre fra EDV API
 const getCadastre = async () => {
   try {
@@ -79,6 +88,25 @@ const getEindomsVerdiAPI = async () => {
   }
 };
 
+//Henter ut fornavn på eier av bolig
+const getFirstnameAPI = async () => {
+  try {
+    await getApiKey();
+    const resp = await axios.get(
+      `https://api.eiendomsverdi.no/realproperty/v1/Owners/${pNr}/RealEstates`,
+      {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + accessTokenKey,
+        },
+      }
+    );
+    firstname = resp.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 property_png = "";
 //Henter ut info fra EDV API
@@ -111,11 +139,11 @@ app.use(express.json());
 let nr = ""
 app.post('/pNr',cors(), (req, res) =>{
   console.log(req.body);
-
+getFirstnameAPI();
 });
 
 app.get("/api", (req, res) => {
-  res.send({apiInfo});
+  res.send({ apiInfo, firstname });
   console.log(nr);
 });
 

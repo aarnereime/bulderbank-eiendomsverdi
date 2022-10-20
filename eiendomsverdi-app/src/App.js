@@ -6,7 +6,8 @@ import Main from './components/main/Main'
 import Footer from './components/footer/Footer'
 import Navbar from './components/navbar/Navbar'
 import BankID from './components/bankid/BankID'
-import Test from "./components/test";
+import Test from "./components/test"
+import Boligverdi from './components/boligverdi/Boligverdi'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/bankid" element={<BankID />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/boligverdi" element={<Boligverdi />} />
         </Routes>
         <Footer />
       </Router>

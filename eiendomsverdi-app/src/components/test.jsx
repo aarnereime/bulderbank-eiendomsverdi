@@ -6,8 +6,8 @@ const test = () => {
 
   const [allValues, setAllValues] = useState({
     firstname: "",
-    lastname: "",
-    gender: "",
+    // lastname: "",
+    // gender: "",
   });
 
   // useEffect(() => {
@@ -28,12 +28,12 @@ const test = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.randomuser.me/")
+      .get("http://localhost:3001/api")
       .then((response) => {
         setAllValues({
-          firstname: response.data.results[0].name.first,
-          lastname: response.data.results[0].name.last,
-          gender: response.data.results[0].gender,
+          firstname: response.data.apiInfo.data.address.streetName,
+          // lastname: response.data.data.address.streetLetter,
+          // gender: response.data.data.address.municipality,
         });
       })
       .catch((error) => {
@@ -46,7 +46,7 @@ const test = () => {
 
   return (
     <div>
-      {loading ? <div>Loading...</div>: <div>Hello! {allValues.firstname} {allValues.lastname}, your gender is {allValues.gender}</div>}
+      {loading ? <div>Loading...</div>: <div>Hello! {allValues.firstname} </div>}
     </div>
   );
 };
