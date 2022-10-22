@@ -116,3 +116,36 @@
 
   transform: scale(-1, 1);
 }
+
+.søk-om-lån {
+  width: 280px;
+  height: 53px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px 0;
+  color: white;
+  background: #185dc1;
+  margin-bottom: 30px;
+  margin-top: 70px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .søk-om-lån  {
+    width: 160px;
+  }
+}
+
+.neste-prisantydning a {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 156%;
+  letter-spacing: 0.015em;
+  text-decoration-line: underline;
+  font-feature-settings: "tnum" on, "lnum" on;
+  color: #8a929f;
+}

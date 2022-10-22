@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import "./boligverdi.css";
 
 const Boligverdi = () => {
-  let fornavn = 'John';
-  let addresse = 'Gateveien 32, 5308, Kleppestø'
+  let fornavn = "John";
+  let addresse = "Gateveien 32, 5308, Kleppestø";
   let estimert_boligverdi = "6 500 000 - 7 000 000";
 
   const [loading, setLoading] = useState(true);
@@ -68,6 +68,13 @@ const Boligverdi = () => {
               </svg>
             </Link>
           </div>
+        </div>
+        <button type="submit" className="søk-om-lån">
+          Søk om lån
+        </button>
+
+        <div className="neste-prisantydning">
+          <a href="">Gi meg beskjed ved neste prisantydning</a>
         </div>
       </div>
     </div>
