@@ -48,7 +48,7 @@ const BankID = () => {
     event.target.reset();
 
     //navigerer tilbake til mainpage (senere skal denne ta oss videre til visning av eiendomwverdien)
-    // navigate("/boligverdi");
+    navigate("/boligverdi");
   };
 
   // Gjør det bare mulig å taste inn tall i inputen

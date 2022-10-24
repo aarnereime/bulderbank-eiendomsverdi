@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./boligverdi.css";
@@ -33,6 +33,10 @@ const Boligverdi = () => {
   //       setLoading(false);
   //     });
   // }, []);
+
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  const onClick = () => setIsActive(!isActive);
 
   return (
     <div className="boligverdi">
@@ -75,6 +79,55 @@ const Boligverdi = () => {
 
         <div className="neste-prisantydning">
           <a href="">Gi meg beskjed ved neste prisantydning</a>
+          <div className="rødpil">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <button onClick={onClick} className="dropbtn">
+            <p>Stemmer ikke bolig verdien din</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className={`dropdown-indicator ${
+                isActive ? "active" : "inactive"
+              }`}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
+
+          <div
+            ref={dropdownRef}
+            className={`dropdown-content ${isActive ? "active" : ""}`}
+          >
+            <p>
+              Dersom du nylig har pusset opp eller bygget ut vil dette Ikke tas
+              hensyn til. For å få et reelt estimat må du gjennomføre en
+              e-takst.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -82,5 +135,3 @@ const Boligverdi = () => {
 };
 
 export default Boligverdi;
-
-//hent all verdien på selve bankid siden isteden for å vente til du kommer til den nye boligverdi siden
