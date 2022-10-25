@@ -49,7 +49,7 @@ app.post("/pNr", function (req, res) {
   pNr = req.body.pNr;
   getEindomsVerdiAPI();
   res.redirect("/api");
-  console.log(pNr);
+
 });
 
 
@@ -97,12 +97,12 @@ const getEindomsVerdiAPI = async () => {
 
 
 
-//Henter ut fornavn på eier av bolig
+// Henter ut fornavn på eier av bolig
 const getFirstnameAPI = async () => {
   try {
     await getCadastre();
     const resp = await axios.get(
-      `https://api.eiendomsverdi.no/realproperty/v1/Owners/${pNr}/RealEstates`,
+      `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/owners`,
       {
         method: "GET",
         headers: {
@@ -110,7 +110,7 @@ const getFirstnameAPI = async () => {
         },
       }
     );
-    firstname = resp.data.data;
+    firstname = resp.data.data[0];
   } catch (error) {
     console.error(error);
   }
@@ -144,9 +144,9 @@ const googleImage = async () => {
 //googleImage();
 
 
-
 app.get("/api", (req, res) => {
   getEindomsVerdiAPI();
+  getFirstnameAPI();
   res.send({ apiInfo, firstname });
 });
 

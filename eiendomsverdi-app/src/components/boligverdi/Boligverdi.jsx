@@ -1,38 +1,54 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./boligverdi.css";
 
 const Boligverdi = () => {
-  let fornavn = "John";
-  let addresse = "Gateveien 32, 5308, Kleppestø";
+  const location = useLocation();
+
+  const fødselsnummer = location.state.pNr;
+
   let estimert_boligverdi = "6 500 000 - 7 000 000";
 
   const [loading, setLoading] = useState(true);
 
-  const [allValues, setAllValues] = useState({
-    firstname: "",
-    // lastname: "",
-    // gender: "",
+  let [allValues, setAllValues] = useState({
+    firstname: "Årne",
+    address: "",
+    streetNumber: "",
+    streetLetter: "",
+    postCode: "",
+    city: "",
+    // houseValue: "",
   });
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/api")
-  //     .then((response) => {
-  //       setAllValues({
-  //         firstname: response.data.apiInfo.data.address.streetName,
-  //         // lastname: response.data.data.address.streetLetter,
-  //         // gender: response.data.data.address.municipality,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error(`Error fetching data: ${error}`);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
+  // sender fødselsnummer fra input til backend
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api")
+      .then((response) => {
+        axios
+          .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
+          .then((response) => {
+            setAllValues({
+              firstname: response.data.firstname.owner.name,
+              address: response.data.apiInfo.data.address.streetName,
+              streetNumber: response.data.apiInfo.data.address.streetNumber,
+              streetLetter: response.data.apiInfo.data.address.streetLetter,
+              postCode: response.data.apiInfo.data.address.postOffice.code,
+              city: response.data.apiInfo.data.address.postOffice.name,
+              // houseValue: response.data.data.address.municipality,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+      });
+  }, [fødselsnummer]);
+
 
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
@@ -42,14 +58,14 @@ const Boligverdi = () => {
     <div className="boligverdi">
       <div className="boligverdi-grid">
         <div className="hallaien-headline">
-          <h1>Hallaien, {fornavn}! 🤩</h1>
+          <h1>Hallaien, {allValues.firstname}! 🤩</h1>
 
           <h3>Dette var boligene vi fant på deg</h3>
           <h4>Velg en bolig for å se detaljer om bolig og verdi</h4>
         </div>
 
         <div className="bolig">
-          <div className="addresse">{addresse}</div>
+          <div className="addresse">{allValues.address} {allValues.streetNumber}{allValues.streetLetter}, {allValues.postCode}, {allValues.city}</div>
           <div className="estimert_boligverdi_teskt">
             Data estimert boligverdi
           </div>
@@ -123,9 +139,9 @@ const Boligverdi = () => {
             className={`dropdown-content ${isActive ? "active" : ""}`}
           >
             <p>
-              Dersom du nylig har pusset opp eller bygget ut vil dette Ikke tas
-              hensyn til. For å få et reelt estimat må du gjennomføre en
-              e-takst.
+              Dersom du nylig har pusset opp eller bygget ut vil dette{" "}
+              <strong>Ikke</strong> tas hensyn til. For å få et reelt estimat må
+              du gjennomføre en e-takst.
             </p>
           </div>
         </div>
