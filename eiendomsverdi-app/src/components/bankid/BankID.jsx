@@ -63,7 +63,7 @@ const BankID = () => {
           <input
             className="fødselsnummer-login"
             ref={fødselsnummerRef}
-            type="text"
+            type="password"
             required="required"
             placeholder="11 siffer"
             maxLength="11"

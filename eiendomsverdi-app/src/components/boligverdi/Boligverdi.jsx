@@ -13,7 +13,7 @@ const Boligverdi = () => {
   const [loading, setLoading] = useState(true);
 
   let [allValues, setAllValues] = useState({
-    firstname: "Årne",
+    firstname: "",
     address: "",
     streetNumber: "",
     streetLetter: "",
@@ -47,25 +47,31 @@ const Boligverdi = () => {
       .catch((error) => {
         console.error(`Error fetching data: ${error}`);
       });
-  }, [fødselsnummer]);
-
+  }, []);
 
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
 
+  const firstname = allValues.firstname.split(" ")[0]
+  const firstnameRightFormat = (firstname[0] + firstname.substring(1).toLowerCase())
+
   return (
     <div className="boligverdi">
       <div className="boligverdi-grid">
         <div className="hallaien-headline">
-          <h1>Hallaien, {allValues.firstname}! 🤩</h1>
+          <h1>Hallaien, {firstnameRightFormat}! 🤩</h1>
 
           <h3>Dette var boligene vi fant på deg</h3>
           <h4>Velg en bolig for å se detaljer om bolig og verdi</h4>
         </div>
 
         <div className="bolig">
-          <div className="addresse">{allValues.address} {allValues.streetNumber}{allValues.streetLetter}, {allValues.postCode}, {allValues.city}</div>
+          <div className="addresse">
+            {allValues.address} {allValues.streetNumber}
+            {allValues.streetLetter},<br></br> {allValues.postCode},{" "}
+            {allValues.city}
+          </div>
           <div className="estimert_boligverdi_teskt">
             Data estimert boligverdi
           </div>
