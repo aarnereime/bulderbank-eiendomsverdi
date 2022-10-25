@@ -12,11 +12,12 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
-//webapps-api.test.bulderbank.tech/Edv/getedvtoken
-
 let accessTokenKey = "";
 let apiInfo = "";
 let firstname = "";
+
+let address = "";
+let zipcode = "";
 
 const accessTokenURL =
   "https://webapps-api.prod.bulderbank.tech/Edv/getedvtoken";
@@ -35,6 +36,7 @@ const getApiKey = async () => {
     });
     accessTokenKey = resp.data.accessToken;
   } catch (error) {
+    console.error("apikey")
     console.error(error);
   }
 };
@@ -45,10 +47,11 @@ let pNr = "";
 
 app.post("/pNr", function (req, res) {
   pNr = req.body.pNr;
-  console.log(pNr)
+  getEindomsVerdiAPI();
+  res.redirect("/api");
+  console.log(pNr);
 });
 
-// const pNr = process.env.REACT_APP_FODSELSNUMMER;
 
 //Henter ut cadastre fra EDV API
 const getCadastre = async () => {
@@ -86,12 +89,12 @@ const getEindomsVerdiAPI = async () => {
     address = `${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`;
     zipcode = resp.data.data.address.postOffice.code;
     apiInfo = resp.data;
+    
   } catch (error) {
     console.error(error);
   }
 };
-let address = "";
-let zipcode = "";
+
 
 
 //Henter ut fornavn på eier av bolig
@@ -139,13 +142,11 @@ const googleImage = async () => {
 };
 
 //googleImage();
-getEindomsVerdiAPI()
-
-getFirstnameAPI()
 
 
 
 app.get("/api", (req, res) => {
+  getEindomsVerdiAPI();
   res.send({ apiInfo, firstname });
 });
 
