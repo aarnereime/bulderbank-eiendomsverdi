@@ -7,6 +7,9 @@ import Footer from './components/footer/Footer'
 import Navbar from './components/navbar/Navbar'
 import BankID from './components/bankid/BankID'
 import Boligverdi from './components/boligverdi/Boligverdi'
+import BoligverdiInfo from './components/boligverdi-info/BoligverdiInfo'
+
+
 
 function App() {
 
@@ -18,6 +21,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/bankid" element={<BankID />} />
           <Route path="/boligverdi" element={<Boligverdi />} />
+          <Route path="/boligverdiInfo" element={<BoligverdiInfo />} />
         </Routes>
         <Footer />
       </Router>

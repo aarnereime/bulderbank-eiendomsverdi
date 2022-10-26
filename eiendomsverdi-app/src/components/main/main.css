@@ -118,18 +118,18 @@ div {
   margin: 10px 30px;
 }
 
- ol {
+.main ol {
    counter-reset: item;
    list-style-type: none;
    line-height: 2.2;
  }
         
-ol li {
+.main ol li {
   display: block;
   position: relative;
 }
         
- ol li:before {
+.main ol li:before {
    content: counter(item) " ";
    counter-increment: item;
    color: white;

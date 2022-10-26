@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./boligverdi.css";
 
 const Boligverdi = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const fødselsnummer = location.state.pNr;
@@ -30,7 +31,8 @@ const Boligverdi = () => {
           .then((response) => {
             setAllValues({
               firstname: response.data.firstname.owner.name,
-              streetAddress: response.data.firstname.owner.address.streetAddress,
+              streetAddress:
+                response.data.firstname.owner.address.streetAddress,
               postCode: response.data.apiInfo.data.address.postOffice.code,
               city: response.data.apiInfo.data.address.postOffice.name,
               // houseValue: response.data.data.address.municipality,
@@ -49,8 +51,17 @@ const Boligverdi = () => {
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
 
-  const firstname = allValues.firstname.split(" ")[0]
-  const firstnameRightFormat = (firstname[0] + firstname.substring(1).toLowerCase())
+  const firstname = allValues.firstname.split(" ")[0];
+  const firstnameRightFormat =
+    firstname[0] + firstname.substring(1).toLowerCase();
+
+  const toBoligverdiInfo = () => {
+    navigate("/boligverdiInfo", { state: { pNr: fødselsnummer } });
+  };
+
+  const toSøkOmLån = () => {
+    navigate("/");
+  };
 
   return (
     <div className="boligverdi">
@@ -72,7 +83,11 @@ const Boligverdi = () => {
           </div>
           <div className="estimert-boligverdi">{estimert_boligverdi}</div>
           <div className="rødpil">
-            <Link to="/">
+            <a
+              onClick={() => {
+                toBoligverdiInfo();
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -87,10 +102,15 @@ const Boligverdi = () => {
                   d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
                 />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
-        <button type="submit" className="søk-om-lån">
+        <button
+          onClick={() => {
+            toSøkOmLån();
+          }}
+          className="søk-om-lån"
+        >
           Søk om lån
         </button>
 

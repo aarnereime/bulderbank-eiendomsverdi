@@ -107,6 +107,7 @@
 }
 
 .bolig .rødpil {
+  cursor: pointer;
   width: 35px;
   color: red;
 
@@ -158,6 +159,9 @@
 }
 
 .neste-prisantydning .rødpil {
+  margin-left: 10px;
+  width: 30px;
+  color: red;
   transform: scale(-1, 1);
 }
 
