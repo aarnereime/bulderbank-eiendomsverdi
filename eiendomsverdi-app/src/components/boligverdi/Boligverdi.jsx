@@ -14,9 +14,7 @@ const Boligverdi = () => {
 
   let [allValues, setAllValues] = useState({
     firstname: "",
-    address: "",
-    streetNumber: "",
-    streetLetter: "",
+    streetAddress: "",
     postCode: "",
     city: "",
     // houseValue: "",
@@ -32,9 +30,7 @@ const Boligverdi = () => {
           .then((response) => {
             setAllValues({
               firstname: response.data.firstname.owner.name,
-              address: response.data.apiInfo.data.address.streetName,
-              streetNumber: response.data.apiInfo.data.address.streetNumber,
-              streetLetter: response.data.apiInfo.data.address.streetLetter,
+              streetAddress: response.data.firstname.owner.address.streetAddress,
               postCode: response.data.apiInfo.data.address.postOffice.code,
               city: response.data.apiInfo.data.address.postOffice.name,
               // houseValue: response.data.data.address.municipality,
@@ -68,8 +64,7 @@ const Boligverdi = () => {
 
         <div className="bolig">
           <div className="addresse">
-            {allValues.address} {allValues.streetNumber}
-            {allValues.streetLetter},<br></br> {allValues.postCode},{" "}
+            {allValues.streetAddress},<br></br> {allValues.postCode},{" "}
             {allValues.city}
           </div>
           <div className="estimert_boligverdi_teskt">
