@@ -18,9 +18,7 @@ const Main = () => {
               marginRight: "10px",
             }}
           >
-            <h1 style={{ fontSize: "68px" }}>
-              Sjekk din boligverdi
-            </h1>
+            <h1 style={{ fontSize: "68px" }}>Sjekk din boligverdi</h1>
 
             <h2 style={{ fontSize: "32px" }}>
               Hvilken rolle spiller det for deg? ✨
@@ -38,7 +36,7 @@ const Main = () => {
             <div className="sok-laan__button-wrapper">
               <Link to="/bankid">
                 <button className="button-sok-om-laan">
-                  Sjekk boligverdi{" "}
+                  <span>Sjekk boligverdi</span>
                 </button>
               </Link>
             </div>

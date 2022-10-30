@@ -115,7 +115,9 @@ const Boligverdi = () => {
         </button>
 
         <div className="neste-prisantydning">
-          <a href="">Gi meg beskjed ved neste prisantydning</a>
+          <a href="" className="neste-prisantydning-link">
+            Gi meg beskjed ved neste prisantydning
+          </a>
           <div className="rødpil">
             <svg
               xmlns="http://www.w3.org/2000/svg"
