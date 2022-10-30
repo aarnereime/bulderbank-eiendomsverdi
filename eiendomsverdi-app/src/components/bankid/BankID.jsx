@@ -63,7 +63,7 @@ const BankID = () => {
           <input
             className="fødselsnummer-login"
             ref={fødselsnummerRef}
-            type="password"
+            type="text"
             required="required"
             placeholder="11 siffer"
             maxLength="11"
@@ -72,7 +72,7 @@ const BankID = () => {
           />
 
           <button type="submit" className="fødselsnummer-neste">
-            Neste
+            <span>Neste</span>
           </button>
         </form>
       </div>

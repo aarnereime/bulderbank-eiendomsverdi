@@ -27,7 +27,7 @@
 
 .bankid .rødpil svg {
   width: 35px;
-  color: red;
+  color: #ff4d5b;
 }
 
 .bb-fødselsnummer {
@@ -53,10 +53,11 @@
 }
 
 .fødselsnummer-login {
+  font-family: 'Aeonik';
   outline: none;
   color: white;
   font-size: 25px;
-  padding: 10px;
+  padding: 10px 15px;
   background: transparent;
   border: 2px solid #E6E6E6;
   border-radius: 15px; 
@@ -64,6 +65,7 @@
 }
 
 .fødselsnummer-neste {
+  font-family: 'Aeonik';
   width: 200px;
   font-size: 20px;
   padding: 15px 0;

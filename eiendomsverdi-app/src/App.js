@@ -8,6 +8,7 @@ import Navbar from './components/navbar/Navbar'
 import BankID from './components/bankid/BankID'
 import Boligverdi from './components/boligverdi/Boligverdi'
 import BoligverdiInfo from './components/boligverdi-info/BoligverdiInfo'
+import Email from './components/emailside/Email'
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/bankid" element={<BankID />} />
           <Route path="/boligverdi" element={<Boligverdi />} />
           <Route path="/boligverdiInfo" element={<BoligverdiInfo />} />
+          <Route path="/email" element={<Email />} />
         </Routes>
         <Footer />
       </Router>

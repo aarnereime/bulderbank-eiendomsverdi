@@ -21,7 +21,7 @@
 
 .BoligverdiInfo .rødpil svg {
   width: 35px;
-  color: red;
+  color: #ff4d5b;
   cursor: pointer;
 }
 
@@ -87,6 +87,7 @@ hr.line {
 
 .boligverdiInfo-søk-om-lån,
 .boligverdiInfo-sjekk-rente {
+  font-family: 'Aeonik';
   width: 45%;
   height: 73px;
   font-size: 16px;
@@ -146,6 +147,11 @@ hr.line {
 .boligverdiInfo-neste-prisantydning .rødpil-neste-prisantydning {
   margin-left: 10px;
   width: 30px;
-  color: red;
+  color: #ff4d5b;
   transform: scale(-1, 1);
+}
+
+.boligverdiInfo-neste-prisantydning-link:hover {
+  color: #ff4d5b;
+  text-decoration-line: none;
 }

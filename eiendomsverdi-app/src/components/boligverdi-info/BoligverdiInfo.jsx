@@ -159,7 +159,9 @@ const BoligverdiInfo = () => {
         </div>
 
         <div className="boligverdiInfo-neste-prisantydning">
-          <a href="">Gi meg beskjed ved neste prisantydning</a>
+          <a href="/email" className="boligverdiInfo-neste-prisantydning-link">
+            Gi meg beskjed ved neste prisantydning
+          </a>
           <div className="rødpil-neste-prisantydning">
             <svg
               xmlns="http://www.w3.org/2000/svg"

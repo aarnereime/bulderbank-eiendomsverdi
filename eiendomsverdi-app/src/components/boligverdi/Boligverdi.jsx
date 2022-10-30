@@ -111,11 +111,11 @@ const Boligverdi = () => {
           }}
           className="søk-om-lån"
         >
-          Søk om lån
+          <span>Søk om lån</span>
         </button>
 
         <div className="neste-prisantydning">
-          <a href="" className="neste-prisantydning-link">
+          <a href="/email" className="neste-prisantydning-link">
             Gi meg beskjed ved neste prisantydning
           </a>
           <div className="rødpil">
