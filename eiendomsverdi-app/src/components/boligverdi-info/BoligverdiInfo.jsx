@@ -78,32 +78,56 @@ const BoligverdiInfo = () => {
         {/* dette bør gjøres om til for loop */}
         <div className="husInformasjon">
           <p>Primærrom m2</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.primaryArea} m2</p>
+          {allValues.primaryArea == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.primaryArea} m2</p>
+          )}
         </div>
         <hr class="line" />
         <div className="husInformasjon">
           <p>Bruksareal</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.usableArea} m2</p>
+          {allValues.usableArea == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.usableArea} m2</p>
+          )}
         </div>
         <hr class="line" />
         <div className="husInformasjon">
           <p>Tomt</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.grossArea} m2</p>
+          {allValues.grossArea == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.grossArea} m2</p>
+          )}
         </div>
         <hr class="line" />
         <div className="husInformasjon">
           <p>Byggeår</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.buildYear}</p>
+          {allValues.buildYear == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.buildYear}</p>
+          )}
         </div>
         <hr class="line" />
         <div className="husInformasjon">
           <p>Soverom</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.numberOfBedrooms}</p>
+          {allValues.numberOfBedrooms == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.numberOfBedrooms}</p>
+          )}
         </div>
         <hr class="line" />
         <div className="husInformasjon">
           <p>Etasje(r)</p>
-          <p style={{ color: "#ff4d5b" }}>{allValues.numberOfFloors}</p>
+          {allValues.numberOfFloors == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{allValues.numberOfFloors}</p>
+          )}
         </div>
         <hr class="line" />
 
