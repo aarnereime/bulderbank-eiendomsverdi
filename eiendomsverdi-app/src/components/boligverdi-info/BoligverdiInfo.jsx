@@ -43,6 +43,35 @@ const BoligverdiInfo = () => {
       });
   }, []);
 
+  // Parameternavn for detalje listen
+  const infoParameter = [
+    "Primærrom",
+    "Bruksareal",
+    "Tomt",
+    "Byggeår",
+    "Soverom",
+    "Etasje(r)",
+  ];
+
+  // Mapper allValues, looper gjennom alle verdier og viser disse
+  // på nettsiden med korrespondernde navn fra listen infoParameter
+  const displayInfo = (allValues) =>
+    Object.values(allValues).map((value, index) => (
+      <>
+        <div className="husInformasjon">
+          <p>{infoParameter[index]}</p>
+          {value == null ? (
+            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+          ) : index <= 2 ? (
+            <p style={{ color: "#ff4d5b" }}>{value} m2</p>
+          ) : (
+            <p style={{ color: "#ff4d5b" }}>{value}</p>
+          )}
+        </div>
+        <hr className="line" />
+      </>
+    ));
+
   const toBoligverdi = () => {
     navigate("/boligverdi", { state: { pNr: fødselsnummer } });
   };
@@ -80,61 +109,8 @@ const BoligverdiInfo = () => {
 
         <h2 className="h2påBoligverdiInfo">Detaljer</h2>
 
-        {/* dette bør gjøres om til for loop */}
-        <div className="husInformasjon">
-          <p>Primærrom m2</p>
-          {allValues.primaryArea == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.primaryArea} m2</p>
-          )}
-        </div>
-        <hr class="line" />
-        <div className="husInformasjon">
-          <p>Bruksareal</p>
-          {allValues.usableArea == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.usableArea} m2</p>
-          )}
-        </div>
-        <hr class="line" />
-        <div className="husInformasjon">
-          <p>Tomt</p>
-          {allValues.grossArea == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.grossArea} m2</p>
-          )}
-        </div>
-        <hr class="line" />
-        <div className="husInformasjon">
-          <p>Byggeår</p>
-          {allValues.buildYear == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.buildYear}</p>
-          )}
-        </div>
-        <hr class="line" />
-        <div className="husInformasjon">
-          <p>Soverom</p>
-          {allValues.numberOfBedrooms == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.numberOfBedrooms}</p>
-          )}
-        </div>
-        <hr class="line" />
-        <div className="husInformasjon">
-          <p>Etasje(r)</p>
-          {allValues.numberOfFloors == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
-          ) : (
-            <p style={{ color: "#ff4d5b" }}>{allValues.numberOfFloors}</p>
-          )}
-        </div>
-        <hr class="line" />
+        {/* Viser informasjon om bolig */}
+        {displayInfo(allValues)}
 
         <h2 className="h2påBoligverdiInfo" style={{ marginTop: "50px" }}>
           Hvordan kommer vi frem til denne prisen?
