@@ -35,10 +35,10 @@ const Boligverdi = () => {
               firstname: response.data.firstname.owner.name,
               streetAddress:
                 response.data.firstname.owner.address.streetAddress, 
-              aiInfo: response.data.apiInfo,
+              apiInfo: response.data.apiInfo,
               // houseValue: response.data.data.address.municipality,
             });
-            console.log(allValues.apiInfo)
+            console.log()
           })
           .catch((error) => {
             console.log(error);
@@ -110,7 +110,7 @@ const Boligverdi = () => {
           <h4>Velg en bolig for å se detaljer om bolig og verdi</h4>
         </div>
         
-        
+        {console.log(allValues.apiInfo)}
         {getHouses(allValues.apiInfo)}
         
         <button

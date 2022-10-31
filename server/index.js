@@ -75,6 +75,7 @@ const getEindomsVerdiAPI = async () => {
   try {
     await getCadastre();
     console.log(cadastres);
+    apiInfo.length = 0;
     for (const cadastre of cadastres){
       
       console.log(cadastre)
