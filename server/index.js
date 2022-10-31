@@ -110,7 +110,12 @@ const getFirstnameAPI = async () => {
         },
       }
     );
-    firstname = resp.data.data[0];
+    data = resp.data.data;
+    for (const val of data) {
+      if (val.owner.identity == pNr) {
+        firstname = val.owner;
+      }
+    }
   } catch (error) {
     console.error(error);
   }

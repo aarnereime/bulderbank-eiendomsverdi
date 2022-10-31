@@ -30,9 +30,9 @@ const Boligverdi = () => {
           .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
           .then((response) => {
             setAllValues({
-              firstname: response.data.firstname.owner.name,
+              firstname: response.data.firstname.name,
               streetAddress:
-                response.data.firstname.owner.address.streetAddress,
+                response.data.firstname.address.streetAddress,
               postCode: response.data.apiInfo.data.address.postOffice.code,
               city: response.data.apiInfo.data.address.postOffice.name,
               // houseValue: response.data.data.address.municipality,
