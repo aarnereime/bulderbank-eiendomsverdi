@@ -49,6 +49,7 @@
 }
 
 .bolig {
+  margin-bottom: 20px;
   display: flex;
   position: relative;
   width: 617px;

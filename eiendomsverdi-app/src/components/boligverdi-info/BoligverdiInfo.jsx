@@ -8,6 +8,7 @@ const BoligverdiInfo = () => {
   const location = useLocation();
 
   const fødselsnummer = location.state.pNr;
+  const index = location.state.idx;
 
   let [allValues, setAllValues] = useState({
     primaryArea: "",
@@ -24,13 +25,17 @@ const BoligverdiInfo = () => {
       .get("http://localhost:3001/api")
       .then((response) => {
         setAllValues({
-          primaryArea: response.data.apiInfo.data.attributes.primaryArea.value,
-          usableArea: response.data.apiInfo.data.attributes.usableArea.value,
-          grossArea: response.data.apiInfo.data.attributes.grossArea.value,
-          buildYear: response.data.apiInfo.data.attributes.buildYear,
+          primaryArea:
+            response.data.apiInfo[index].data.attributes.primaryArea.value,
+          usableArea:
+            response.data.apiInfo[index].data.attributes.usableArea.value,
+          grossArea:
+            response.data.apiInfo[index].data.attributes.grossArea.value,
+          buildYear: response.data.apiInfo[index].data.attributes.buildYear,
           numberOfBedrooms:
-            response.data.apiInfo.data.attributes.numberOfBedrooms,
-          numberOfFloors: response.data.apiInfo.data.attributes.numberOfFloors,
+            response.data.apiInfo[index].data.attributes.numberOfBedrooms,
+          numberOfFloors:
+            response.data.apiInfo[index].data.attributes.numberOfFloors,
         });
       })
       .catch((error) => {
