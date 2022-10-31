@@ -13,11 +13,11 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 let accessTokenKey = "";
-let apiInfo = "";
+let apiInfo = [];
 let firstname = "";
 
-let address = "";
-let zipcode = "";
+let address = [];
+let zipcode = [];
 
 const accessTokenURL =
   "https://webapps-api.prod.bulderbank.tech/Edv/getedvtoken";
@@ -37,21 +37,12 @@ const getApiKey = async () => {
     accessTokenKey = resp.data.accessToken;
   } catch (error) {
     console.error("apikey")
-    console.error(error);
   }
 };
 
 
-let cadastre = "";
+let cadastres = [];
 let pNr = "";
-
-app.post("/pNr", function (req, res) {
-  pNr = req.body.pNr;
-  getEindomsVerdiAPI();
-  res.redirect("/api");
-
-});
-
 
 //Henter ut cadastre fra EDV API
 const getCadastre = async () => {
@@ -66,9 +57,15 @@ const getCadastre = async () => {
         },
       }
     );
-    cadastre = resp.data.data[0].cadastre;
+
+    cadastres.length = 0;
+
+    for (i = 0; i < resp.data.data.length; i++){
+      cadastres.push(resp.data.data[i].cadastre);
+    }
+  
   } catch (error) {
-    console.error(error);
+    console.error("lmao");
   }
 };
 
@@ -77,21 +74,23 @@ const getCadastre = async () => {
 const getEindomsVerdiAPI = async () => {
   try {
     await getCadastre();
-    const resp = await axios.get(
-      `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
-      {
-        method: "GET",
-        headers: {
-          authorization: "Bearer " + accessTokenKey,
-        },
-      }
-    );
-    address = `${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`;
-    zipcode = resp.data.data.address.postOffice.code;
-    apiInfo = resp.data;
-    
+    apiInfo.length = 0;
+    for (const cadastre of cadastres){
+      const resp = await axios.get(
+        `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
+        {
+          method: "GET",
+          headers: {
+            authorization: "Bearer " + accessTokenKey,
+          },
+        }
+      );
+      address.push(`${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`);
+      zipcode.push(resp.data.data.address.postOffice.code);
+      apiInfo.push(resp.data);
+    }
   } catch (error) {
-    console.error(error);
+    console.error("eiendoms");
   }
 };
 
@@ -102,7 +101,7 @@ const getFirstnameAPI = async () => {
   try {
     await getCadastre();
     const resp = await axios.get(
-      `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/owners`,
+      `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastres[0].kNr}/${cadastres[0].gNr}/${cadastres[0].bNr}/${cadastres[0].fNr}/${cadastres[0].sNr}/owners`,
       {
         method: "GET",
         headers: {
@@ -117,7 +116,7 @@ const getFirstnameAPI = async () => {
       }
     }
   } catch (error) {
-    console.error(error);
+    console.error("name");
   }
 };
 
@@ -142,16 +141,22 @@ const googleImage = async () => {
     );
     property_png = resp.data;
   } catch (error) {
-    console.error(error);
+    console.error("image");
   }
 };
 
 //googleImage();
 
-
-app.get("/api", (req, res) => {
+app.post("/pNr", function (req, res) {
+  pNr = req.body.pNr;
   getEindomsVerdiAPI();
   getFirstnameAPI();
+  res.redirect("/api");
+
+});
+
+app.get("/api", (req, res) => {
+  
   res.send({ apiInfo, firstname });
 });
 

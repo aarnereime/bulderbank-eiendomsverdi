@@ -18,6 +18,7 @@ const Boligverdi = () => {
     streetAddress: "",
     postCode: "",
     city: "",
+    apiInfo: []
     // houseValue: "",
   });
 
@@ -30,13 +31,14 @@ const Boligverdi = () => {
           .post("http://localhost:3001/pNr", { pNr: fødselsnummer })
           .then((response) => {
             setAllValues({
+              
               firstname: response.data.firstname.name,
               streetAddress:
-                response.data.firstname.address.streetAddress,
-              postCode: response.data.apiInfo.data.address.postOffice.code,
-              city: response.data.apiInfo.data.address.postOffice.name,
+                response.data.firstname.address.streetAddress, 
+              apiInfo: response.data.apiInfo,
               // houseValue: response.data.data.address.municipality,
             });
+            console.log()
           })
           .catch((error) => {
             console.log(error);
@@ -63,48 +65,54 @@ const Boligverdi = () => {
     navigate("/");
   };
 
+  const getHouses = apiInfo => apiInfo.map((house) => (        
+    <div className="bolig">
+      <div className="addresse">
+        {house.data.address.postOffice.name},<br></br> {house.data.address.postOffice.code},{" "}
+        {allValues.city}
+      </div>
+      <div className="estimert_boligverdi_teskt">
+        Data estimert boligverdi
+      </div>
+      <div className="estimert-boligverdi">{estimert_boligverdi}</div>
+      <div className="rødpil">
+        <a
+          onClick={() => {
+            toBoligverdiInfo();
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  )); 
+
+
   return (
     <div className="boligverdi">
       <div className="boligverdi-grid">
         <div className="hallaien-headline">
           <h1>Hallaien, {firstnameRightFormat}! 🤩</h1>
-
           <h3>Dette var boligene vi fant på deg</h3>
           <h4>Velg en bolig for å se detaljer om bolig og verdi</h4>
         </div>
-
-        <div className="bolig">
-          <div className="addresse">
-            {allValues.streetAddress},<br></br> {allValues.postCode},{" "}
-            {allValues.city}
-          </div>
-          <div className="estimert_boligverdi_teskt">
-            Data estimert boligverdi
-          </div>
-          <div className="estimert-boligverdi">{estimert_boligverdi}</div>
-          <div className="rødpil">
-            <a
-              onClick={() => {
-                toBoligverdiInfo();
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+        
+        {console.log(allValues.apiInfo)}
+        {getHouses(allValues.apiInfo)}
+        
         <button
           onClick={() => {
             toSøkOmLån();
