@@ -21,6 +21,7 @@ const Boligverdi = () => {
 
   // sender fødselsnummer fra input til backend
   useEffect(() => {
+    console.log("kek");
     axios
       .get("http://localhost:3001/api")
       .then((response) => {
@@ -109,7 +110,6 @@ const Boligverdi = () => {
           <h4>Velg en bolig for å se detaljer om bolig og verdi</h4>
         </div>
         
-        {console.log(allValues.apiInfo)}
         {getHouses(allValues.apiInfo)}
         
         <button
