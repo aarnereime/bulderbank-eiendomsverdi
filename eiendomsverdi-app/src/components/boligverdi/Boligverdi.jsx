@@ -21,7 +21,6 @@ const Boligverdi = () => {
 
   // sender fødselsnummer fra input til backend
   useEffect(() => {
-    console.log("kek");
     axios
       .get("http://localhost:3001/api")
       .then((response) => {
@@ -34,7 +33,7 @@ const Boligverdi = () => {
               apiInfo: response.data.apiInfo,
               // houseValue: response.data.data.address.municipality,
             });
-            console.log()
+            
           })
           .catch((error) => {
             console.log(error);
@@ -63,7 +62,7 @@ const Boligverdi = () => {
 
   const getHouses = (apiInfo) =>
     apiInfo.map((house, index) => (
-      <div className="bolig">
+      <div key = {index} className="bolig">
         <div className="addresse">
           {house.data.address.streetName} {" "}
           {house.data.address.streetNumber}
