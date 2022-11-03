@@ -57,9 +57,9 @@ const BoligverdiInfo = () => {
   // på nettsiden med korrespondernde navn fra listen infoParameter
   const displayInfo = (allValues) =>
     Object.values(allValues).map((value, index) => (
-      <div key = {index}>
+      <div key={index}>
         <div className="husInformasjon">
-          <p >{infoParameter[index]}</p>
+          <p>{infoParameter[index]}</p>
           {value == null ? (
             <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
           ) : index <= 2 ? (
