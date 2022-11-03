@@ -22,7 +22,7 @@ const BoligverdiInfo = () => {
   // sender fødselsnummer fra input til backend
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api")
+      .post("http://localhost:3001/api", { pNr: fødselsnummer })
       .then((response) => {
         setAllValues({
           primaryArea:
@@ -57,9 +57,9 @@ const BoligverdiInfo = () => {
   // på nettsiden med korrespondernde navn fra listen infoParameter
   const displayInfo = (allValues) =>
     Object.values(allValues).map((value, index) => (
-      <>
+      <div key = {index}>
         <div className="husInformasjon">
-          <p>{infoParameter[index]}</p>
+          <p >{infoParameter[index]}</p>
           {value == null ? (
             <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
           ) : index <= 2 ? (
@@ -69,7 +69,7 @@ const BoligverdiInfo = () => {
           )}
         </div>
         <hr className="line" />
-      </>
+      </div>
     ));
 
   const toBoligverdi = () => {

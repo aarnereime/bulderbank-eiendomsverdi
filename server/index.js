@@ -13,11 +13,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 let accessTokenKey = "";
-let apiInfo = [];
-let firstname = "";
 
-let address = [];
-let zipcode = [];
 
 const accessTokenURL =
   "https://webapps-api.prod.bulderbank.tech/Edv/getedvtoken";
@@ -41,11 +37,10 @@ const getApiKey = async () => {
 };
 
 
-let cadastres = [];
-let pNr = "";
+
 
 //Henter ut cadastre fra EDV API
-const getCadastre = async () => {
+const getCadastre = async (pNr) => {
   try {
     await getApiKey();
     const resp = await axios.get(
@@ -57,12 +52,11 @@ const getCadastre = async () => {
         },
       }
     );
-
-    cadastres.length = 0;
-
+    cadastres = [];
     for (i = 0; i < resp.data.data.length; i++){
       cadastres.push(resp.data.data[i].cadastre);
     }
+    return cadastres;
   
   } catch (error) {
     console.error("lmao");
@@ -71,10 +65,10 @@ const getCadastre = async () => {
 
 
 //Henter ut info fra EDV API
-const getEindomsVerdiAPI = async () => {
+const getEindomsVerdiAPI = async (pNr) => {
   try {
-    await getCadastre();
-    apiInfo.length = 0;
+    cadastres = await getCadastre(pNr);
+    apiInfo = [];
     for (const cadastre of cadastres){
       const resp = await axios.get(
         `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
@@ -85,10 +79,11 @@ const getEindomsVerdiAPI = async () => {
           },
         }
       );
-      address.push(`${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`);
-      zipcode.push(resp.data.data.address.postOffice.code);
+      //address.push(`${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`);
+      //zipcode.push(resp.data.data.address.postOffice.code);
       apiInfo.push(resp.data);
     }
+    return apiInfo;
   } catch (error) {
     console.error("eiendoms");
   }
@@ -97,9 +92,9 @@ const getEindomsVerdiAPI = async () => {
 
 
 // Henter ut fornavn på eier av bolig
-const getFirstnameAPI = async () => {
+const getFirstnameAPI = async (pNr) => {
   try {
-    await getCadastre();
+    await getCadastre(pNr);
     const resp = await axios.get(
       `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastres[0].kNr}/${cadastres[0].gNr}/${cadastres[0].bNr}/${cadastres[0].fNr}/${cadastres[0].sNr}/owners`,
       {
@@ -115,6 +110,7 @@ const getFirstnameAPI = async () => {
         firstname = val.owner;
       }
     }
+    return firstname;
   } catch (error) {
     console.error("name");
   }
@@ -147,16 +143,14 @@ const googleImage = async () => {
 
 //googleImage();
 
-app.post("/pNr", function (req, res) {
-  pNr = req.body.pNr;
-  getEindomsVerdiAPI();
-  getFirstnameAPI();
-  res.redirect("/api");
-
-});
-
-app.get("/api", (req, res) => {
+app.post("/api", async (req, res) => {
   
+  let address = [];
+  let zipcode = [];
+  
+  const pNr = req.body.pNr;
+  const apiInfo = await getEindomsVerdiAPI(pNr);
+  const firstname = await getFirstnameAPI(pNr);
   res.send({ apiInfo, firstname });
 });
 
