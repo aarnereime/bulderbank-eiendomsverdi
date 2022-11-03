@@ -109,7 +109,7 @@ const RødPil = (props) => {
     return (
         <div className="rødpil">
             <a
-              onClick={props?.action}
+              onClick={props.action}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
