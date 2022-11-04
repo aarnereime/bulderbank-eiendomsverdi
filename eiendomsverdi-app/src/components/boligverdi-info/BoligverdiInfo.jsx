@@ -18,6 +18,7 @@ const BoligverdiInfo = () => {
     numberOfBedrooms: "",
     numberOfFloors: "",
   });
+  let [address, setAddress] = useState([])
 
   // sender fødselsnummer fra input til backend
   useEffect(() => {
@@ -35,8 +36,9 @@ const BoligverdiInfo = () => {
           numberOfBedrooms:
             response.data.apiInfo[index].data.attributes.numberOfBedrooms,
           numberOfFloors:
-            response.data.apiInfo[index].data.attributes.numberOfFloors,
+            response.data.apiInfo[index].data.attributes.numberOfFloors,  
         });
+        setAddress(response.data.apiInfo[index].data.address);
       })
       .catch((error) => {
         console.error(`Error fetching data: ${error}`);
@@ -75,7 +77,7 @@ const BoligverdiInfo = () => {
   const toBoligverdi = () => {
     navigate("/boligverdi", { state: { pNr: fødselsnummer } });
   };
-
+  console.log(address);
   return (
     <div className="BoligverdiInfo">
       <div className="rødpil">
@@ -101,11 +103,14 @@ const BoligverdiInfo = () => {
         </a>
       </div>
       <div className="boligverdiInfo-grid">
-        <img
-          className="bildeAvHus"
-          src="https://www.webatlas.no/WAAPI-Statiskkart/punkt/?x=5.65390586853027&y=58.7331085205078&SRS=4326&KartType=aerial&api_key=9da664c7-e5b9-4dc7-a093-7ef0f90563c0&PikslerPerMeter=4.5&Bredde=980&Hoyde=400&SkjulMarkor=true"
-          height={350}
-        />
+      <img className="bildeAvHus"
+                src = {`https://webapps-api.test.bulderbank.tech/Google/map?Address=${address.streetName}
+                -${address.streetNumber}
+                -${address.streetLetter}
+                -${address.postOffice?.code}
+                -${address.postOffice?.name}}
+                %203&maptype=1&zoom=20`}
+                height={150}/>
 
         <h2 className="h2påBoligverdiInfo">Detaljer</h2>
 

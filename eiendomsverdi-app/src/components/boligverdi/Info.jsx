@@ -5,7 +5,7 @@ import "./boligverdi.css";
 export const Info = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
-  
+    
     let estimert_boligverdi = "6 500 000 - 7 000 000";
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false);
@@ -22,22 +22,34 @@ export const Info = (props) => {
     const toSøkOmLån = () => {
       navigate("/");
     };
-  
+    
     const getHouses = (apiInfo) =>
       apiInfo.map((house, index) => (
         <div key = {index} className="bolig">
-          <div className="addresse">
-            {house.data.address.streetName} {" "}
-            {house.data.address.streetNumber}
-            {house.data.address.streetLetter},<br></br>
-            {house.data.address.postOffice.code}, {" "}
-            {house.data.address.postOffice.name}
-          </div>
-          <div className="estimert_boligverdi_teskt">
-            Data estimert boligverdi
-          </div>
-          <div className="estimert-boligverdi">{estimert_boligverdi}</div>
-            <RødPil action = {()=>{toBoligverdiInfo(index);}}/>  
+          <div className ="description">
+            <div className="addresse">
+                {house.data.address.streetName} {" "}
+                {house.data.address.streetNumber}
+                {house.data.address.streetLetter},<br></br>
+                {house.data.address.postOffice.code}, {" "}
+                {house.data.address.postOffice.name}
+            </div>
+            <div className="estimert_boligverdi_teskt">
+                Data estimert boligverdi
+            </div>
+            <div className="estimert-boligverdi">{estimert_boligverdi}</div>
+                <RødPil action = {()=>{toBoligverdiInfo(index);}}/>  
+            </div>
+            <div className="image">
+            <img className="bildeAvHus"
+                src = {`https://webapps-api.test.bulderbank.tech/Google/map?Address=${house.data.address.streetName}
+                -${house.data.address.streetNumber}
+                -${house.data.address.streetLetter}
+                -${house.data.address.postOffice.code}
+                -${house.data.address.postOffice.name}}
+                %203&maptype=1&zoom=20`}
+                height={150}/>
+            </div>
           </div>
       )); 
   
