@@ -8,42 +8,18 @@ const BoligverdiInfo = () => {
   const location = useLocation();
 
   const fødselsnummer = location.state.pNr;
+  const apiValues = location.state.apiValues;
   const index = location.state.idx;
 
-  let [allValues, setAllValues] = useState({
-    primaryArea: "",
-    usableArea: "",
-    grossArea: "",
-    buildYear: "",
-    numberOfBedrooms: "",
-    numberOfFloors: "",
-  });
-  let [address, setAddress] = useState([])
-
-  // sender fødselsnummer fra input til backend
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/api", { pNr: fødselsnummer })
-      .then((response) => {
-        setAllValues({
-          primaryArea:
-            response.data.apiInfo[index].data.attributes.primaryArea.value,
-          usableArea:
-            response.data.apiInfo[index].data.attributes.usableArea.value,
-          grossArea:
-            response.data.apiInfo[index].data.attributes.grossArea.value,
-          buildYear: response.data.apiInfo[index].data.attributes.buildYear,
-          numberOfBedrooms:
-            response.data.apiInfo[index].data.attributes.numberOfBedrooms,
-          numberOfFloors:
-            response.data.apiInfo[index].data.attributes.numberOfFloors,  
-        });
-        setAddress(response.data.apiInfo[index].data.address);
-      })
-      .catch((error) => {
-        console.error(`Error fetching data: ${error}`);
-      });
-  }, []);
+  const allValues = {
+    primaryArea: apiValues.apiInfo[index].data.attributes.primaryArea.value,
+    usableArea: apiValues.apiInfo[index].data.attributes.usableArea.value,
+    grossArea: apiValues.apiInfo[index].data.attributes.grossArea.value,
+    buildYear: apiValues.apiInfo[index].data.attributes.buildYear,
+    numberOfBedrooms: apiValues.apiInfo[index].data.attributes.numberOfBedrooms,
+    numberOfFloors: apiValues.apiInfo[index].data.attributes.numberOfFloors,
+  }
+  const address = apiValues.apiInfo[index].data.address;
 
   // Parameternavn for detalje listen
   const infoParameter = [
@@ -75,9 +51,9 @@ const BoligverdiInfo = () => {
     ));
 
   const toBoligverdi = () => {
-    navigate("/boligverdi", { state: { pNr: fødselsnummer } });
+    navigate("/boligverdi", { state: { pNr: fødselsnummer, apiValues: apiValues} });
   };
-  console.log(address);
+  
   return (
     <div className="BoligverdiInfo">
       <div className="rødpil">

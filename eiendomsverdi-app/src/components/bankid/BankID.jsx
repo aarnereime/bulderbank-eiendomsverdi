@@ -18,7 +18,7 @@ const BankID = () => {
 
     //navigerer tilbake til mainpage (senere skal denne ta oss videre til visning av eiendomsverdien)
     navigate("/boligverdi", {
-      state: { pNr: fødselsnummer },
+      state: { pNr: fødselsnummer ,apiValues: {pNr:""}},
     });
   };
 
