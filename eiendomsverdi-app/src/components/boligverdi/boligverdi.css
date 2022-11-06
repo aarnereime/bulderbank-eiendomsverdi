@@ -12,6 +12,18 @@
   padding: 40px 25%;
 }
 
+@media (max-width: 767px) {
+  .boligverdi-grid {
+    padding: 40px 15%;
+  }
+}
+
+@media (max-width: 580px) {
+  .boligverdi-grid {
+    padding: 40px 10%;
+  }
+}
+
 .hallaien-headline {
   justify-content: left;
   margin-bottom: 60px;
@@ -49,78 +61,96 @@
 }
 
 .bolig {
+  justify-content: space-between;
+  padding: 10px 10px;
   margin-bottom: 20px;
   display: flex;
-  position: relative;
-  width: 617px;
-  height: 163px;
+  width: auto;
+  height: auto;
   background: #2a3146;
   border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  border: none;
+  align-items: center;
+}
+
+@media (max-width: 435px) {
+  .bolig {
+    align-items: normal;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding: 10px;
+}
+
+.description > div {
+  margin: 2px 0;
+  font-feature-settings: "tnum" on, "lnum" on;
+  font-style: normal;
+}
+
+@media (max-width: 767px) {
+  .description > div {
+    margin: 0 0;
+  }
 }
 
 .addresse {
-  position: absolute;
-  width: 250px;
-  height: 34px;
-  left: 39px;
-  top: 18px;
-
-  font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  line-height: 17px;
   letter-spacing: 0.15em;
+  line-height: 17px;
   text-transform: uppercase;
-  font-feature-settings: "tnum" on, "lnum" on;
   color: #8a929f;
 }
 
 .estimert_boligverdi_teskt {
-  position: absolute;
-  width: 200px;
-  height: 28px;
-  left: 39px;
-  top: 57px;
-
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 156%;
   letter-spacing: 0.015em;
-  font-feature-settings: "tnum" on, "lnum" on;
+  line-height: 156%;
   color: #f6f3f3;
 }
 
 .estimert-boligverdi {
-  position: absolute;
-  width: 200px;
-  height: 28px;
-  left: 39px;
-  top: 79px;
-
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 156%;
   letter-spacing: 0.015em;
-  font-feature-settings: "tnum" on, "lnum" on;
+  line-height: 156%;
   color: #12d499;
 }
 
+.bildeAvHus-div {
+  display: flex;
+}
+
+.bildeAvHus-div .bildeAvHus {
+  border-radius: 3px;
+  height: 170px;
+}
+
+@media (max-width: 435px) {
+  .bildeAvHus-div .bildeAvHus {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 .bolig .rødpil {
-  cursor: pointer;
   width: 35px;
   color: #ff4d5b;
-
-  position: absolute;
-  left: 35px;
-  top: 115px;
-
   transform: scale(-1, 1);
 }
 
 .søk-om-lån {
-  font-family: 'Aeonik';
+  font-family: "Aeonik";
   width: 280px;
   height: 53px;
   font-size: 16px;
@@ -142,9 +172,9 @@
   -moz-box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.8);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .søk-om-lån {
-    width: 160px;
+    width: 100%;
   }
 }
 
@@ -167,8 +197,8 @@
 }
 
 .neste-prisantydning-link:hover {
-   color: #ff4d5b;
-   text-decoration-line: none;
+  color: #ff4d5b;
+  text-decoration-line: none;
 }
 
 .neste-prisantydning .rødpil {
@@ -240,10 +270,11 @@
   height: 30px;
   width: 30px;
   color: #ff4d5b;
+  transform: rotate(90deg);
 }
 
 .dropdown-indicator.active {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   transition-duration: 0.3s;
 }
 

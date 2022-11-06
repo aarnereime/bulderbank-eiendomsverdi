@@ -107,8 +107,8 @@ const BoligverdiInfo = () => {
                 src = {`https://webapps-api.test.bulderbank.tech/Google/map?Address=${address.streetName}
                 -${address.streetNumber}
                 -${address.streetLetter}
-                -${address.postOffice?.code}
-                -${address.postOffice?.name}}
+                -${address.postOffice.code}
+                -${address.postOffice.name}}
                 %203&maptype=1&zoom=20`}
                 height={150}/>
 

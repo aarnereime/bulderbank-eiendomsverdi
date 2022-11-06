@@ -24,6 +24,12 @@
   padding-bottom: 40px;
 }
 
+@media (max-width: 767px) {
+  .email-grid {
+    padding: 0 10%;
+  }
+}
+
 .email-grid h1 {
   margin: 0 0;
   margin-top: 20px;
@@ -43,7 +49,13 @@
   line-height: 156%;
 
   letter-spacing: 0.015em;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: "tnum" on, "lnum" on;
+}
+
+@media (max-width: 767px) {
+  .email-grid p {
+    width: 100%;
+  }
 }
 
 .email-input {
@@ -51,20 +63,23 @@
   border: none;
   width: 100%;
   height: 56px;
-  background: #2A3146;
+  background: #2a3146;
   padding: 0 15px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 
-  font-family: 'Aeonik';
+  font-family: "Aeonik";
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
   letter-spacing: 0.05em;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: "tnum" on, "lnum" on;
   color: white;
 }
 
 .email-lagre {
-  font-family: 'Aeonik';
+  font-family: "Aeonik";
   width: 250px;
   font-weight: 500;
   font-size: 18px;
@@ -79,6 +94,12 @@
   letter-spacing: 0.05em;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .email-lagre {
+    width: 100%;
+  }
 }
 
 .email-lagre:hover {

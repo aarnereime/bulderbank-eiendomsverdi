@@ -48,13 +48,14 @@ div {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 20px 10%;
+  padding: 20px 5%;
 }
 
 @media (min-width: 767px) {
   .bb-eiendomsverdi-grid {
     display: flex;
     flex-direction: row;
+    padding: 20px 10%;
   }
 }
 
@@ -106,6 +107,12 @@ div {
   letter-spacing: 0.05em;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .sok-laan__button-wrapper {
+    text-align: center;
+  }
 }
 
 .button-sok-om-laan:hover {

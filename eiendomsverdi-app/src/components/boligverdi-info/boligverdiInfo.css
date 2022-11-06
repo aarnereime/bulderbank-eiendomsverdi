@@ -33,10 +33,6 @@
   padding-bottom: 40px;
 }
 
-.bildeAvHus {
-  margin-bottom: 50px;
-}
-
 .h2påBoligverdiInfo {
   margin: 0 0;
   font-style: normal;
@@ -87,7 +83,7 @@ hr.line {
 
 .boligverdiInfo-søk-om-lån,
 .boligverdiInfo-sjekk-rente {
-  font-family: 'Aeonik';
+  font-family: "Aeonik";
   width: 45%;
   height: 73px;
   font-size: 16px;
