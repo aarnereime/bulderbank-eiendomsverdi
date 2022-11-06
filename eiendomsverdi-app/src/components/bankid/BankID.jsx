@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./bankid.css";
 
-const BankID = () => {
+export const BankID = (props) => {
   const navigate = useNavigate();
   const fødselsnummerRef = useRef();
 
@@ -16,10 +16,7 @@ const BankID = () => {
     // fjerner det man skrev inn i input
     event.target.reset();
 
-    //navigerer tilbake til mainpage (senere skal denne ta oss videre til visning av eiendomsverdien)
-    navigate("/boligverdi", {
-      state: { pNr: fødselsnummer ,apiValues: {pNr:""}},
-    });
+    props.setPnr(fødselsnummer);
   };
 
   // Gjør det bare mulig å taste inn tall i inputen
@@ -79,5 +76,3 @@ const BankID = () => {
     </div>
   );
 };
-
-export default BankID;
