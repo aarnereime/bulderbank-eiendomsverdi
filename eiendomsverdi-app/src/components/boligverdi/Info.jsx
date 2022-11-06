@@ -4,7 +4,6 @@ import "./boligverdi.css";
 
 export const Info = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   let estimert_boligverdi = "6 500 000 - 7 000 000";
   const dropdownRef = useRef(null);
@@ -17,7 +16,7 @@ export const Info = (props) => {
 
   const toBoligverdiInfo = (index) => {
     navigate("/boligverdiInfo", {
-      state: { pNr: props.fødselsnummer, idx: index },
+      state: { pNr: props.fødselsnummer, idx: index, apiValues: props.values}
     });
   };
 

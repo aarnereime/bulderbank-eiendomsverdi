@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let smode = false
+let smode = true;
 
 smode ? root.render(
   <React.StrictMode>

@@ -67,8 +67,8 @@ const getCadastre = async (pNr) => {
 //Henter ut info fra EDV API
 const getEindomsVerdiAPI = async (pNr) => {
   try {
-    cadastres = await getCadastre(pNr);
-    apiInfo = [];
+    const cadastres = await getCadastre(pNr);
+    const apiInfo = [];
     for (const cadastre of cadastres){
       const resp = await axios.get(
         `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
@@ -79,8 +79,6 @@ const getEindomsVerdiAPI = async (pNr) => {
           },
         }
       );
-      //address.push(`${resp.data.data.address.streetName} ${resp.data.data.address.streetNumber}`);
-      //zipcode.push(resp.data.data.address.postOffice.code);
       apiInfo.push(resp.data);
     }
     return apiInfo;
@@ -144,10 +142,6 @@ const googleImage = async () => {
 //googleImage();
 
 app.post("/api", async (req, res) => {
-  
-  let address = [];
-  let zipcode = [];
-  
   const pNr = req.body.pNr;
   const apiInfo = await getEindomsVerdiAPI(pNr);
   const firstname = await getFirstnameAPI(pNr);
