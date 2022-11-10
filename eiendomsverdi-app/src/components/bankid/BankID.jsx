@@ -7,7 +7,7 @@ export const BankID = (props) => {
   const fødselsnummerRef = useRef();
 
   let handleSubmit = async (event) => {
-    // unngår å refreshe siden
+    // unngår å refreshe siden  
     event.preventDefault();
 
     // setter en global api variabel til fødselsnummer i input
