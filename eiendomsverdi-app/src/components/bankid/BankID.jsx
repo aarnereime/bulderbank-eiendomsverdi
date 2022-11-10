@@ -10,7 +10,7 @@ export const BankID = (props) => {
     // unngår å refreshe siden  
     event.preventDefault();
 
-    // setter en global api variabel til fødselsnummer i input
+    // setter en global api variabel til fødselsnummer i input 
     let fødselsnummer = fødselsnummerRef.current.value;
 
     // fjerner det man skrev inn i input
