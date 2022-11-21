@@ -1,0 +1,71 @@
+.StopPage {
+  max-width: 1200px;
+  padding: auto 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.StopPage-grid {
+  margin: 5% 30%;
+  margin-bottom: 20%;
+}
+
+@media (max-width: 500px) {
+  .StopPage-grid {
+    margin: 5% 10%;
+  }
+}
+
+.stopPage-heart {
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.StopPage-grid h1 {
+  margin: 0 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 156%;
+  font-feature-settings: "tnum" on, "lnum" on;
+}
+
+.StopPage-grid p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+
+  letter-spacing: 0.05em;
+  font-feature-settings: "tnum" on, "lnum" on;
+}
+
+.stopPage-neste-prisantydning {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
+.stopPage-neste-prisantydning-link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 156%;
+  letter-spacing: 0.015em;
+  text-decoration-line: underline;
+  font-feature-settings: "tnum" on, "lnum" on;
+  color: #8a929f;
+}
+
+.stopPage-neste-prisantydning .rødpil-neste-prisantydning {
+  width: 30px;
+  color: #ff4d5b;
+  transform: scale(-1, 1);
+}
+
+.stopPage-neste-prisantydning-link:hover {
+  color: #ff4d5b;
+  text-decoration-line: none;
+}
