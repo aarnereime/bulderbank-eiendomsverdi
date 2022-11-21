@@ -10,6 +10,7 @@ import Boligverdi from "./components/boligverdi/Boligverdi";
 import BoligverdiInfo from "./components/boligverdi-info/BoligverdiInfo";
 import Email from "./components/emailside/Email";
 import ScrollToTop from "./components/scrollToTop";
+import StopPage from "./components/stopPage/StopPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/boligverdi" element={<Boligverdi />} />
           <Route path="/boligverdiInfo" element={<BoligverdiInfo />} />
           <Route path="/email" element={<Email />} />
+          <Route path="/stopPage" element={<StopPage />} />
           <Route path="/*" element={<Authentication />} />
         </Routes>
         <Footer />
