@@ -9,7 +9,7 @@ const Boligverdi = () => {
   const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
 
-  let estimert_boligverdi = "6 500 000 - 7 000 000";
+  let estimert_boligverdi = "10 000 000";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);

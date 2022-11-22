@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./boligverdiInfo.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const BoligverdiInfo = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const BoligverdiInfo = () => {
     buildYear: apiValues.apiInfo[index].data.attributes.buildYear,
     numberOfBedrooms: apiValues.apiInfo[index].data.attributes.numberOfBedrooms,
     numberOfFloors: apiValues.apiInfo[index].data.attributes.numberOfFloors,
-  }
+  };
   const address = apiValues.apiInfo[index].data.address;
 
   // Parameternavn for detalje listen
@@ -39,11 +38,11 @@ const BoligverdiInfo = () => {
         <div className="husInformasjon">
           <p>{infoParameter[index]}</p>
           {value == null ? (
-            <p style={{ color: "#ff4d5b" }}>Ingen informasjon å hente</p>
+            <p>Ingen informasjon å hente</p>
           ) : index <= 2 ? (
-            <p style={{ color: "#ff4d5b" }}>{value} m2</p>
+            <p>{value} m2</p>
           ) : (
-            <p style={{ color: "#ff4d5b" }}>{value}</p>
+            <p>{value}</p>
           )}
         </div>
         <hr className="line" />
@@ -51,9 +50,11 @@ const BoligverdiInfo = () => {
     ));
 
   const toBoligverdi = () => {
-    navigate("/boligverdi", { state: { pNr: fødselsnummer, apiValues: apiValues} });
+    navigate("/boligverdi", {
+      state: { pNr: fødselsnummer, apiValues: apiValues },
+    });
   };
-  
+
   return (
     <div className="BoligverdiInfo">
       <div className="rødpil">
@@ -79,14 +80,28 @@ const BoligverdiInfo = () => {
         </a>
       </div>
       <div className="boligverdiInfo-grid">
-      <img className="bildeAvHus"
-                src = {`https://webapps-api.test.bulderbank.tech/Google/map?Address=${address.streetName}
+        <div className="infoSide-husContainer">
+          <img
+            className="bildeAvHus-infoSide"
+            src={`https://webapps-api.test.bulderbank.tech/Google/map?Address=${address.streetName}
                 -${address.streetNumber}
                 -${address.streetLetter}
                 -${address.postOffice.code}
                 -${address.postOffice.name}}
                 %203&maptype=1&zoom=20`}
-                height={150}/>
+          />
+          <div className="infoSide-bildeLayer">
+            <div className="infoSide-bildeAddresse">
+              {address.streetName} {address.streetNumber}
+              {address.streetLetter},<br></br>
+              {address.postOffice.code}, {address.postOffice.name}
+            </div>
+            <div className="infoSide-estimertPris">
+              Estimert boligverdi: <br />
+              <span className="pris">{"100 000 000"}</span>
+            </div>
+          </div>
+        </div>
 
         <h2 className="h2påBoligverdiInfo">Detaljer</h2>
 
