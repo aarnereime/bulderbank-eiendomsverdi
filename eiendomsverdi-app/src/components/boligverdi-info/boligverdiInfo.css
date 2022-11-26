@@ -212,3 +212,7 @@ hr.line {
   color: #ff4d5b;
   text-decoration-line: none;
 }
+
+.BoligverdiInfo p {
+  text-align: justify;
+}

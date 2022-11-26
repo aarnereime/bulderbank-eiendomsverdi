@@ -49,9 +49,11 @@ export const Loading = (props) => {
 
   return (
     <div className="Loading">
-      <div className="loadingImg">
-        <img className="BulderB-logo" src={logo} />
-        <h2 style={{ marginTop: "100px" }}>Henter data...</h2>
+      <div className="loadingAnimation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <h2 style={{ marginTop: "100px" }}>Henter data</h2>
       </div>
     </div>
   );
