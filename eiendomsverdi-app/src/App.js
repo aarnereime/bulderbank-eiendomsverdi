@@ -11,8 +11,11 @@ import BoligverdiInfo from "./components/boligverdi-info/BoligverdiInfo";
 import Email from "./components/emailside/Email";
 import ScrollToTop from "./components/scrollToTop";
 import StopPage from "./components/stopPage/StopPage";
+import mixpanel from 'mixpanel-browser';
 
 function App() {
+  mixpanel.init('243fa50cf85ae67fa64d352af6399dcb', {debug: true});
+  mixpanel.track('Sign up');
   return (
     <div className="App">
       <Router>
