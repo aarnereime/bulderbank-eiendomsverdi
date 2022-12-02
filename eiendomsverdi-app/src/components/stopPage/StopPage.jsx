@@ -1,8 +1,18 @@
-import React from 'react'
+import React from "react";
 import "./stoppage.css";
 import img from "../../images/Heart-stopPage.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StopPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const errorMessage = location.state.error;
+
+  const tilbakeHjemside = () => {
+    navigate("/");
+  };
+
   return (
     <div className="StopPage">
       <div className="StopPage-grid">
@@ -18,11 +28,7 @@ const StopPage = () => {
           />
         </div>
         <h1>Oi, her har det gått litt skeis</h1>
-        <p>
-          Ser ut til at det dessverre er en feil hos leverandøren av tjenesten.
-          Legg gjerne igjen kontaktinformasjon så skal vi gi en lyd når alt er
-          oppe og går igjen 😉
-        </p>
+        <p>{errorMessage}</p>
         <div className="stopPage-neste-prisantydning">
           <div className="neste-prisantydning-tekst">
             <a href="/email" className="stopPage-neste-prisantydning-link">
@@ -48,9 +54,14 @@ const StopPage = () => {
             </div>
           </div>
         </div>
+        <div className="hjemsideKnappContainer">
+          <button onClick={tilbakeHjemside} className="hjemsideKnapp">
+            <span>Tilbake til hjemside</span>
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default StopPage
+export default StopPage;
