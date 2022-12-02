@@ -53,7 +53,7 @@ const Boligverdi = () => {
         <div className="bildeAvHus-div">
           <img
             className="bildeAvHus"
-            src={`https://webapps-api.test.bulderbank.tech/Google/map?Address=${house.data.address.streetName}
+            src={`https://webapps-api.prod.bulderbank.tech/Google/map?Address=${house.data.address.streetName}
                 -${house.data.address.streetNumber}
                 -${house.data.address.streetLetter}
                 -${house.data.address.postOffice.code}
