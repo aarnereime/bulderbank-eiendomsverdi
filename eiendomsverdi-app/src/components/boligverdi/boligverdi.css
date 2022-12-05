@@ -281,3 +281,8 @@
 .dropdown-indicator.inactive {
   transition-duration: 0.3s;
 }
+
+.rødpil-btn {
+  background: none;
+  border: none;
+}

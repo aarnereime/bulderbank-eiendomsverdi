@@ -21,7 +21,10 @@ const Main = () => {
             <h1 style={{ fontSize: "68px" }}>Sjekk din boligverdi</h1>
 
             <h2 style={{ fontSize: "32px" }}>
-              Hvilken rolle spiller det for deg? ✨
+              Hvilken rolle spiller det for deg?{" "}
+              <span role="img" aria-label="Stars">
+                ✨
+              </span>
             </h2>
             <ul className="checklist-ul-list list1">
               <li className="checklist-li-item">

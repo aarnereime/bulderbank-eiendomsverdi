@@ -25,6 +25,11 @@
   cursor: pointer;
 }
 
+.boligverdiInfoBack-btn {
+  background: none;
+  border: none;
+}
+
 .boligverdiInfo-grid {
   display: flex;
   flex-direction: column;

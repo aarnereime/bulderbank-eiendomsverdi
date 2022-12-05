@@ -11,7 +11,7 @@ const Email = () => {
   return (
     <div className="Email">
       <div className="rødpil">
-        <a
+        <button className="emailBack-btn"
           onClick={() => {
             navigate(-1);
           }}
@@ -30,14 +30,17 @@ const Email = () => {
               d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
             />
           </svg>
-        </a>
+        </button>
       </div>
 
       <div className="email-grid">
         <h1>Legg igjen kontaktinformasjon</h1>
         <p>
           Så tar vi kontakt neste måned eller neste gang det er endringer i
-          renten 🤟
+          renten{" "}
+          <span role="img" aria-label="Rock">
+            🤟
+          </span>
         </p>
 
         <p style={{ margin: "0 0", marginTop: "30px" }}>E-post</p>

@@ -1,27 +1,27 @@
 import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./bankid.css";
 
 export const BankID = (props) => {
-  const navigate = useNavigate();
   const fødselsnummerRef = useRef();
 
-  let handleSubmit = async (event) => {
-    // unngår å refreshe siden     
+  const handleSubmit = async (event) => {
+    // unngår å refreshe siden
     event.preventDefault();
 
-    // setter en global api variabel til fødselsnummer i input 
+    // setter en global api variabel til fødselsnummer i input
     let fødselsnummer = fødselsnummerRef.current.value;
+
+    props.setPnr(fødselsnummer);
 
     // fjerner det man skrev inn i input
     event.target.reset();
-
-    props.setPnr(fødselsnummer);
   };
 
   // Gjør det bare mulig å taste inn tall i inputen
   const allowOnlyNumbersInput = (event) => {
-    !/[0-9]/.test(event.key) && event.preventDefault();
+    !(event.key in [...Array(10).keys()] || event.key === "Enter") &&
+      event.preventDefault();
   };
 
   return (

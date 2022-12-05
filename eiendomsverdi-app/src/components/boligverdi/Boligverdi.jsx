@@ -51,7 +51,7 @@ const Boligverdi = () => {
           <RødPil />
         </div>
         <div className="bildeAvHus-div">
-          <img
+          <img alt="img"
             className="bildeAvHus"
             src={`https://webapps-api.prod.bulderbank.tech/Google/map?Address=${house.data.address.streetName}
                 -${house.data.address.streetNumber}

@@ -16,6 +16,11 @@
   cursor: pointer;
 }
 
+.emailBack-btn {
+ background: none;
+ border: none;
+}
+
 .email-grid {
   display: flex;
   flex-direction: column;

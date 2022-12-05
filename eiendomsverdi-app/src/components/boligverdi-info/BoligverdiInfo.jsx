@@ -58,7 +58,7 @@ const BoligverdiInfo = () => {
   return (
     <div className="BoligverdiInfo">
       <div className="rødpil">
-        <a
+        <button className="boligverdiInfoBack-btn"
           onClick={() => {
             toBoligverdi();
           }}
@@ -77,11 +77,11 @@ const BoligverdiInfo = () => {
               d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
             />
           </svg>
-        </a>
+        </button>
       </div>
       <div className="boligverdiInfo-grid">
         <div className="infoSide-husContainer">
-          <img
+          <img alt="img"
             className="bildeAvHus-infoSide"
             src={`https://webapps-api.prod.bulderbank.tech/Google/map?Address=${address.streetName}
                 -${address.streetNumber}
