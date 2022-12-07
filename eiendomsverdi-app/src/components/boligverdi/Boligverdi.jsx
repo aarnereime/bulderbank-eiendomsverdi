@@ -2,7 +2,11 @@ import React, { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./boligverdi.css";
 
-const Boligverdi = () => {
+const Boligverdi = (props) => {
+  props.mixpanel.track_links("#leave_email a", "Clicked leave_email");
+  props.mixpanel.track_links("#søkOmLån", "Clicked søk-lån-boligverdi");
+  
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -79,13 +83,14 @@ const Boligverdi = () => {
             toSøkOmLån();
           }}
           className="søk-om-lån"
-        >
+          id="søkOmLån"
+         >
           <span>Søk om lån</span>
         </button>
 
-        <div className="neste-prisantydning">
-          <a href="/email" className="neste-prisantydning-link">
-            Gi meg beskjed ved neste prisantydning
+        <div className="neste-prisantydning" id ="leave_email">
+          <a href="/email" className="neste-prisantydning-link" >
+            Gi meg beskjed ved neste prisantydning k
           </a>
           <RødPil />
         </div>

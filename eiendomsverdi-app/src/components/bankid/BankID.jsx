@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import "./bankid.css";
 
 export const BankID = (props) => {
+
   const fødselsnummerRef = useRef();
 
-  const handleSubmit = async (event) => {
-    // unngår å refreshe siden
+  props.mixpanel.track_links("#personnr_button", "submitted personnr");
+
+  let handleSubmit = async (event) => {
+    // unngår å refreshe siden     
     event.preventDefault();
 
     // setter en global api variabel til fødselsnummer i input
@@ -68,7 +71,7 @@ export const BankID = (props) => {
             onKeyPress={allowOnlyNumbersInput}
           />
 
-          <button type="submit" className="fødselsnummer-neste">
+          <button type="submit" className="fødselsnummer-neste" id="personnr_button">
             <span>Neste</span>
           </button>
         </form>
