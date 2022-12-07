@@ -11,24 +11,22 @@ import BoligverdiInfo from "./components/boligverdi-info/BoligverdiInfo";
 import Email from "./components/emailside/Email";
 import ScrollToTop from "./components/scrollToTop";
 import StopPage from "./components/stopPage/StopPage";
-import mixpanel from 'mixpanel-browser';
 
-function App() {
-  mixpanel.init('243fa50cf85ae67fa64d352af6399dcb', {debug: true});
-  mixpanel.track('Sign up');
+
+function App(props) {
   return (
     <div className="App">
       <Router>
         <ScrollToTop />
         <Navbar />
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/bankid" element={<Authentication />} />
-          <Route path="/boligverdi" element={<Boligverdi />} />
-          <Route path="/boligverdiInfo" element={<BoligverdiInfo />} />
-          <Route path="/email" element={<Email />} />
-          <Route path="/stopPage" element={<StopPage />} />
-          <Route path="/*" element={<Authentication />} />
+          <Route path="/" element={<Main mixpanel={props.mixpanel}/>} />
+          <Route path="/bankid" element={<Authentication mixpanel={props.mixpanel}/>} />
+          <Route path="/boligverdi" element={<Boligverdi mixpanel={props.mixpanel}/>} />
+          <Route path="/boligverdiInfo" element={<BoligverdiInfo mixpanel={props.mixpanel}/>} />
+          <Route path="/email" element={<Email mixpanel={props.mixpanel}/>} />
+          <Route path="/stopPage" element={<StopPage mixpanel={props.mixpanel}/>} />
+          <Route path="/*" element={<Authentication mixpanel={props.mixpanel}/>} />
         </Routes>
         <Footer />
       </Router>

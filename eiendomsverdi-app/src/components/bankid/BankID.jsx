@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./bankid.css";
 
 export const BankID = (props) => {
+
   const navigate = useNavigate();
   const fødselsnummerRef = useRef();
+
+  props.mixpanel.track_links("#personnr_button", "submitted personnr");
 
   let handleSubmit = async (event) => {
     // unngår å refreshe siden     
@@ -68,7 +71,7 @@ export const BankID = (props) => {
             onKeyPress={allowOnlyNumbersInput}
           />
 
-          <button type="submit" className="fødselsnummer-neste">
+          <button type="submit" className="fødselsnummer-neste" id="personnr_button">
             <span>Neste</span>
           </button>
         </form>
