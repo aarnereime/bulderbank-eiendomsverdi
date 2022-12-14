@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 3001;
 
 let accessTokenKey = "";
 
-
 const accessTokenURL =
   "https://webapps-api.prod.bulderbank.tech/Edv/getedvtoken";
 
@@ -32,12 +31,9 @@ const getApiKey = async () => {
     });
     accessTokenKey = resp.data.accessToken;
   } catch (error) {
-    console.error("apikey")
+    console.error("apikey");
   }
 };
-
-
-
 
 //Henter ut cadastre fra EDV API
 const getCadastre = async (pNr) => {
@@ -53,23 +49,21 @@ const getCadastre = async (pNr) => {
       }
     );
     cadastres = [];
-    for (i = 0; i < resp.data.data.length; i++){
+    for (i = 0; i < resp.data.data.length; i++) {
       cadastres.push(resp.data.data[i].cadastre);
     }
     return cadastres;
-  
   } catch (error) {
     console.error("lmao");
   }
 };
-
 
 //Henter ut info fra EDV API
 const getEindomsVerdiAPI = async (pNr) => {
   try {
     const cadastres = await getCadastre(pNr);
     const apiInfo = [];
-    for (const cadastre of cadastres){
+    for (const cadastre of cadastres) {
       const resp = await axios.get(
         `https://api.eiendomsverdi.no/realproperty/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/attributes`,
         {
@@ -79,15 +73,23 @@ const getEindomsVerdiAPI = async (pNr) => {
           },
         }
       );
+      // const response = await axios.post(
+      //   `https://api.eiendomsverdi.no/estimate/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/EvEstimate`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       authorization: "Bearer " + accessTokenKey,
+      //     },
+      //   }
+      // );
+      // console.log(response)
       apiInfo.push(resp.data);
     }
     return apiInfo;
-  } catch (error) {
-    console.error("eiendoms");
+  } catch (err) {
+    console.error(err.message);
   }
 };
-
-
 
 // Henter ut fornavn på eier av bolig
 const getFirstnameAPI = async (pNr) => {
@@ -114,42 +116,11 @@ const getFirstnameAPI = async (pNr) => {
   }
 };
 
-
-property_png = "";
-//Henter ut info fra EDV API
-const googleImage = async () => {
-  try {
-    await getEindomsVerdiAPI();
-    const resp = await axios({
-        url : `https://webapps-api.test.bulderbank.tech/Google/map`,
-        method: "post",
-        data: {
-            address : address,
-            postalCode : zipcode,
-            zoom : 20,
-            type : 1,
-            size : 640,
-            format : "png"
-        }
-      }
-    );
-    property_png = resp.data;
-  } catch (error) {
-    console.error("image");
-  }
-};
-
-//googleImage();
-
 app.post("/api", async (req, res) => {
   const pNr = req.body.pNr;
   const apiInfo = await getEindomsVerdiAPI(pNr);
   const firstname = await getFirstnameAPI(pNr);
   res.send({ apiInfo, firstname });
-});
-
-app.get("/image",(req, res) => {
-  res.send({property_png});
 });
 
 app.listen(PORT, () => {
