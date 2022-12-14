@@ -90,7 +90,7 @@ const Boligverdi = (props) => {
 
         <div className="neste-prisantydning" id ="leave_email">
           <a href="/email" className="neste-prisantydning-link" >
-            Gi meg beskjed ved neste prisantydning k
+            Gi meg beskjed ved neste prisantydning
           </a>
           <RødPil />
         </div>
