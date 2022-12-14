@@ -1,22 +1,13 @@
 import "./loading.css";
+import logo from "../../images/BulderB.svg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 export const Loading = (props) => {
   const navigate = useNavigate();
   const fødselsnummer = props.pNr;
-
-  const messages = {
-    apiError:
-      "Ser ut til at det dessverre er en feil hos leverandøren av tjenesten. \
-      Legg gjerne igjen kontaktinformasjon så skal vi gi en lyd når alt er oppe og går igjen 😉",
-    noInfoError:
-      "Ser ut til at vi dessverre ikke finner noen eiendommer på ditt navn. \
-      Grunnen til dette kan være en feil hos leverandøren av tjenesten eller \
-      at du ikke eier noen boliger. Legg gjerne igjen kontaktinformasjon \
-      så skal vi gi en lyd når dette er fikset 😉",
-  };
 
   let [apiValues, setApiValues] = useState({
     firstname: "",
@@ -28,6 +19,7 @@ export const Loading = (props) => {
 
   // sender fødselsnummer fra input til backend
   useEffect(() => {
+    //used to cancel api call if neccecary
     const controller = new AbortController();
     axios
       .post("http://localhost:3001/api", {
@@ -42,17 +34,9 @@ export const Loading = (props) => {
         });
         setLoading(false);
       })
-      .catch((err) => {
-        if (err.response || err.request) {
-          console.log("Error", err.message);
-          navigate("/stopPage", { state: { error: messages.apiError } });
-          // res = The client was given an error response (5xx, 4xx)
-          // req = The client never received a response, and the request was never left
-        } else {
-          console.log("Error", err.message);
-          navigate("/stopPage", { state: { error: messages.noInfoError } });
-          // Anything else
-        }
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+        navigate("/stopPage")
       });
     return () => {
       controller.abort();
@@ -67,11 +51,9 @@ export const Loading = (props) => {
 
   return (
     <div className="Loading">
-      <div className="loadingAnimation">
-        <span></span>
-        <span></span>
-        <span></span>
-        <h2 style={{ marginTop: "100px" }}>Henter data</h2>
+      <div className="loadingImg">
+        <img className="BulderB-logo" src={logo} />
+        <h2 style={{ marginTop: "100px" }}>Henter data...</h2>
       </div>
     </div>
   );

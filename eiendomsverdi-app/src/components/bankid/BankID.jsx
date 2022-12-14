@@ -4,6 +4,7 @@ import "./bankid.css";
 
 export const BankID = (props) => {
 
+  //value that can be changed later
   const fødselsnummerRef = useRef();
 
   props.mixpanel.track_links("#personnr_button", "submitted personnr");

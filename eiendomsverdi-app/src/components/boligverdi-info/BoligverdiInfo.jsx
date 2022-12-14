@@ -4,12 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const BoligverdiInfo = () => {
   const navigate = useNavigate();
+  //location used to get values from page directed from.
   const location = useLocation();
 
   const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
   const index = location.state.idx;
-
+  //gets values of a single property from a list by index.
   const allValues = {
     primaryArea: apiValues.apiInfo[index].data.attributes.primaryArea.value,
     usableArea: apiValues.apiInfo[index].data.attributes.usableArea.value,
