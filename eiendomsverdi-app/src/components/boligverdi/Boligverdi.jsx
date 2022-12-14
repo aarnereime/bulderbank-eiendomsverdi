@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./boligverdi.css";
 
 const Boligverdi = (props) => {
-  props.mixpanel.track_links("#leave_email a", "Clicked leave_email");
-  props.mixpanel.track_links("#søkOmLån", "Clicked søk-lån-boligverdi");
   
 
   const location = useLocation();
@@ -31,8 +29,21 @@ const Boligverdi = (props) => {
   };
 
   const toSøkOmLån = () => {
+    //tracks event
+    props.mixpanel.track('Link Clicked', 
+    {"name" : "SøkOmLån"}
+      );
     navigate("/");
   };
+
+  const handleEmail = () =>{
+
+    // Track the link click with Mixpanel
+    props.mixpanel.track('Link Clicked', 
+    {"name" : "leaveEmail"}
+      );
+  }
+
   //generates html content from the list of properties.
   const getHouses = (apiInfo) =>
     apiInfo.map((house, index) => (
@@ -92,7 +103,7 @@ const Boligverdi = (props) => {
         </button>
 
         <div className="neste-prisantydning" id ="leave_email">
-          <a href="/email" className="neste-prisantydning-link" >
+          <a href="/email" className="neste-prisantydning-link"  onClick={() =>{handleEmail()}}>
             Gi meg beskjed ved neste prisantydning
           </a>
           <RødPil />

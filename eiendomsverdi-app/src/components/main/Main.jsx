@@ -4,10 +4,6 @@ import img from '../../images/Du-kan-flytte-lånet2.png';
 import { Link } from 'react-router-dom'
 
 const Main = (props) => {
-  
-  props.mixpanel.track_links("#sok-laan__button", "Clicked sok-laan");
-  
-  
 
   props.mixpanel.track("on main");
 

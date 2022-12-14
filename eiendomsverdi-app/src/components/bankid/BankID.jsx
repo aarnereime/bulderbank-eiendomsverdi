@@ -6,13 +6,16 @@ export const BankID = (props) => {
 
   //value that can be changed later
   const fødselsnummerRef = useRef();
-
-  props.mixpanel.track_links("#personnr_button", "submitted personnr");
-
+  
   let handleSubmit = async (event) => {
     // unngår å refreshe siden     
     event.preventDefault();
-
+    
+    //tracks event
+    props.mixpanel.track('Link Clicked', 
+    {"name" : "bankId"}
+      );
+    
     // setter en global api variabel til fødselsnummer i input
     let fødselsnummer = fødselsnummerRef.current.value;
 
