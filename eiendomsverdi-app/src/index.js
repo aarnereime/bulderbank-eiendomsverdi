@@ -7,10 +7,10 @@ import mixpanel from 'mixpanel-browser';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-mixpanel.init('243fa50cf85ae67fa64d352af6399dcb', {debug: true});
+mixpanel.init('243fa50cf85ae67fa64d352af6399dcb', {debug: false});
 mixpanel.track('Sign up');
 
-
+//decide if you want reacts strictmode on or off.
 let smode = true;
 
 smode ? root.render(

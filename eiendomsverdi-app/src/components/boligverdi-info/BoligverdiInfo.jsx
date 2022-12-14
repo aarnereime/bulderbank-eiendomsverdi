@@ -10,6 +10,7 @@ const BoligverdiInfo = () => {
   const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
   const index = location.state.idx;
+  
   //gets values of a single property from a list by index.
   const allValues = {
     primaryArea: apiValues.apiInfo[index].data.attributes.primaryArea.value,
@@ -49,7 +50,8 @@ const BoligverdiInfo = () => {
         <hr className="line" />
       </div>
     ));
-
+  
+  //function to navigate over to Boligverdi
   const toBoligverdi = () => {
     navigate("/boligverdi", {
       state: { pNr: fødselsnummer, apiValues: apiValues },

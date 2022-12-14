@@ -10,6 +10,7 @@ const Boligverdi = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  //get values from page directed from.
   const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
 
@@ -19,9 +20,11 @@ const Boligverdi = (props) => {
   const onClick = () => setIsActive(!isActive);
 
   const firstname = apiValues.firstname.split(" ")[0];
+  //format the firstname
   const firstnameRightFormat =
     firstname[0] + firstname.substring(1).toLowerCase();
 
+  //function to navigate over to boligverdiinfo page
   const toBoligverdiInfo = (index) => {
     navigate("/boligverdiInfo", {
       state: { pNr: fødselsnummer, idx: index, apiValues: apiValues}
@@ -31,7 +34,7 @@ const Boligverdi = (props) => {
   const toSøkOmLån = () => {
     navigate("/");
   };
-
+  //generates html content from the list of properties.
   const getHouses = (apiInfo) =>
     apiInfo.map((house, index) => (
       <button
