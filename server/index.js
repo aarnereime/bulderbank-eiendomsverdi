@@ -32,12 +32,9 @@ const getApiKey = async () => {
     //get data from api call
     accessTokenKey = resp.data.accessToken;
   } catch (error) {
-    console.error("apikey")
+    console.error("apikey");
   }
 };
-
-
-
 
 //Henter ut cadastre fra EDV API
 const getCadastre = async (pNr) => {
@@ -56,16 +53,14 @@ const getCadastre = async (pNr) => {
     );
     //loops through the properties and lists cadestre numbers.
     cadastres = [];
-    for (i = 0; i < resp.data.data.length; i++){
+    for (i = 0; i < resp.data.data.length; i++) {
       cadastres.push(resp.data.data[i].cadastre);
     }
     return cadastres;
-  
   } catch (error) {
     console.error("lmao");
   }
 };
-
 
 //Henter ut info fra EDV API
 const getEindomsVerdiAttributesAPI = async (pNr) => {
@@ -87,27 +82,27 @@ const getEindomsVerdiAttributesAPI = async (pNr) => {
       );
       try{
         //get api call that gets the property value of a property given the cadastre values of that property.
-      const verdiresp = await axios.post(
-        `https://api.eiendomsverdi.no/estimate/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/EvEstimate`,
-        {
-          method: "POST",
-          headers: {
-            authorization: "Bearer " + accessTokenKey,
-          },
-        }
-      );
-      console.log(verdiresp.data);
+        /*
+        const verdiresp = await axios.post(
+          `https://api.eiendomsverdi.no/estimate/v1/RealEstates/${cadastre.kNr}/${cadastre.gNr}/${cadastre.bNr}/${cadastre.fNr}/${cadastre.sNr}/EvEstimate`,
+          {
+            method: "POST",
+            headers: {
+              authorization: "Bearer " + accessTokenKey,
+            },
+          }
+        );
+        console.log(verdiresp.data);
+        */
       }catch(error){console.log(error)}
       //adds property attrubutes to list.
       apiInfo.push(resp.data);
     }
     return apiInfo;
-  } catch (error) {
-    console.error("eiendoms");
+  } catch (err) {
+    console.error(err.message);
   }
 };
-
-
 
 // Henter ut fornavn på eier av bolig
 const getFirstnameAPI = async (pNr) => {

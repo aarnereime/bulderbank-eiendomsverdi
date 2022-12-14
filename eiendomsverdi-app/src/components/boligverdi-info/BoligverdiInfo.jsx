@@ -7,7 +7,6 @@ const BoligverdiInfo = () => {
   //location used to get values from page directed from.
   const location = useLocation();
 
-  const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
   const index = location.state.idx;
   
@@ -54,14 +53,15 @@ const BoligverdiInfo = () => {
   //function to navigate over to Boligverdi
   const toBoligverdi = () => {
     navigate("/boligverdi", {
-      state: { pNr: fødselsnummer, apiValues: apiValues },
+      state: { apiValues: apiValues },
     });
   };
 
   return (
     <div className="BoligverdiInfo">
       <div className="rødpil">
-        <button className="boligverdiInfoBack-btn"
+        <button
+          className="boligverdiInfoBack-btn"
           onClick={() => {
             toBoligverdi();
           }}
@@ -84,7 +84,8 @@ const BoligverdiInfo = () => {
       </div>
       <div className="boligverdiInfo-grid">
         <div className="infoSide-husContainer">
-          <img alt="img"
+          <img
+            alt="img"
             className="bildeAvHus-infoSide"
             src={`https://webapps-api.prod.bulderbank.tech/Google/map?Address=${address.streetName}
                 -${address.streetNumber}
@@ -105,16 +106,12 @@ const BoligverdiInfo = () => {
             </div>
           </div>
         </div>
-
         <h2 className="h2påBoligverdiInfo">Detaljer</h2>
-
-        {/* Viser informasjon om bolig */}
+        {/*Viser informasjon om bolig*/}
         {displayInfo(allValues)}
-
         <h2 className="h2påBoligverdiInfo" style={{ marginTop: "50px" }}>
           Hvordan kommer vi frem til denne prisen?
         </h2>
-
         <p>
           Det er viktig å fastslå at en estimert verdi svært sjelden vil
           tilsvare en faktisk markedsverdi. I Bulder benytter vi en algoritme
@@ -152,7 +149,6 @@ const BoligverdiInfo = () => {
           boligverdien stiger etter e-takst, vil denne legges til grunn som ny
           godkjent verdi.
         </p>
-
         <div className="boligverdiInfo-buttons-grid">
           <button type="submit" className="boligverdiInfo-søk-om-lån">
             Søk om lån
@@ -161,7 +157,6 @@ const BoligverdiInfo = () => {
             Sjekk renten du kan få
           </button>
         </div>
-
         <div className="boligverdiInfo-neste-prisantydning">
           <a href="/email" className="boligverdiInfo-neste-prisantydning-link">
             Gi meg beskjed ved neste prisantydning

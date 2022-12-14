@@ -11,10 +11,9 @@ const Boligverdi = (props) => {
   const navigate = useNavigate();
 
   //get values from page directed from.
-  const fødselsnummer = location.state.pNr;
   const apiValues = location.state.apiValues;
 
-  let estimert_boligverdi = "10 000 000";
+  let estimert_boligverdi = "100 000 000";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
@@ -27,7 +26,7 @@ const Boligverdi = (props) => {
   //function to navigate over to boligverdiinfo page
   const toBoligverdiInfo = (index) => {
     navigate("/boligverdiInfo", {
-      state: { pNr: fødselsnummer, idx: index, apiValues: apiValues}
+      state: { idx: index, apiValues: apiValues },
     });
   };
 
@@ -58,7 +57,8 @@ const Boligverdi = (props) => {
           <RødPil />
         </div>
         <div className="bildeAvHus-div">
-          <img alt="img"
+          <img
+            alt="img"
             className="bildeAvHus"
             src={`https://webapps-api.prod.bulderbank.tech/Google/map?Address=${house.data.address.streetName}
                 -${house.data.address.streetNumber}
@@ -93,7 +93,7 @@ const Boligverdi = (props) => {
 
         <div className="neste-prisantydning" id ="leave_email">
           <a href="/email" className="neste-prisantydning-link" >
-            Gi meg beskjed ved neste prisantydning k
+            Gi meg beskjed ved neste prisantydning
           </a>
           <RødPil />
         </div>
@@ -157,6 +157,5 @@ const RødPil = (props) => {
     </div>
   );
 };
-
 
 export default Boligverdi;
